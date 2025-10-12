@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import './Skills.css';
+import './Projects.css';
 
-const Skills = () => {
+const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -26,38 +26,54 @@ const Skills = () => {
     };
   }, []);
 
-  const skillCategories = [
+  const projects = [
     {
-      title: 'Cloud Platforms',
-      skills: ['Amazon Web Services (AWS)']
+      name: 'Portfolio Website with Serverless Visitor Counter',
+      description: 'Built a modern, responsive portfolio website with full AWS serverless architecture. Features a real-time visitor counter using Lambda functions, API Gateway, and DynamoDB for data persistence. Deployed with CloudFront CDN, S3 hosting, ACM SSL certificates, and custom domain via Cloudflare DNS. Includes dark mode theme, smooth scroll animations, and mobile-first design.',
+      technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'CloudFormation', 'Cloudflare DNS'],
+      liveLink: 'https://ajwill.ai',
+      githubLink: null
     },
     {
-      title: 'Security & Compliance',
-      skills: ['ISO 27001', 'ISO 42001', 'NIST CSF', 'NIST RMF']
-    },
-    {
-      title: 'GRC Frameworks',
-      skills: ['Risk Assessment', 'Security Auditing', 'Policy Development', 'Compliance Management']
+      name: 'Human Risk Intelligence v3.0 - Cybersecurity News Aggregator',
+      description: 'Built a modern React-based cybersecurity news aggregator with real-time intelligence from trusted sources including RSS feeds, Reddit r/netsec, and Hacker News. Features smart categorization across 15+ topics, offline caching, responsive design with dark theme, and smooth animations. Complete rewrite from static HTML to modern component architecture.',
+      technologies: ['React', 'Vite', 'Lucide React', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'Cloudflare DNS'],
+      liveLink: 'https://www.humanriskintel.com'
     }
   ];
 
   return (
-    <section className={`skills ${isVisible ? 'visible' : ''}`} id="skills" ref={sectionRef}>
+    <section className={`projects ${isVisible ? 'visible' : ''}`} id="projects" ref={sectionRef}>
       <div className="container">
-        <h2 className="section-title">Skills & Expertise</h2>
-        <div className="skills-grid">
-          {skillCategories.map((category, index) => (
+        <h2 className="section-title">Featured Projects</h2>
+        <div className="projects-grid">
+          {projects.map((project, index) => (
             <div 
               key={index} 
-              className="skill-category"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="project-card"
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <h3>{category.title}</h3>
-              <ul>
-                {category.skills.map((skill, skillIndex) => (
-                  <li key={skillIndex}>{skill}</li>
-                ))}
-              </ul>
+              <div className="project-content">
+                <h3>{project.name}</h3>
+                <p className="project-description">{project.description}</p>
+                <div className="project-tech">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span key={techIndex} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+                {project.liveLink && (
+                  <div className="project-links">
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      View Live Site →
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -66,4 +82,4 @@ const Skills = () => {
   );
 };
 
-export default Skills;
+export default Projects;
