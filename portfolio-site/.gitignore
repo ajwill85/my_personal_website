@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AWS and Environment
+.env
+.env.local
+.env.production
+.env.*.local
+*.pem
+*.key
+aws-credentials.txt
+
+# Build artifacts
+*.zip
+lambda-package.zip

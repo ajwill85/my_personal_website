@@ -1,0 +1,222 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Serverless visitor counter with Lambda, API Gateway, and DynamoDB'
+
+Parameters:
+  ProjectName:
+    Type: String
+    Description: 'Name for your project (used for resource naming)'
+    Default: 'ajwill-portfolio'
+    AllowedPattern: '^[a-z0-9-]+$'
+    ConstraintDescription: 'Must contain only lowercase letters, numbers, and hyphens'
+
+Resources:
+  # DynamoDB Table for visitor count
+  VisitorCountTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub '${ProjectName}-visitors'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-visitor-count'
+        - Key: Project
+          Value: !Ref ProjectName
+
+  # IAM Role for Lambda
+  VisitorCounterLambdaRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !Sub '${ProjectName}-visitor-counter-lambda-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'dynamodb:GetItem'
+                  - 'dynamodb:PutItem'
+                  - 'dynamodb:UpdateItem'
+                Resource: !GetAtt VisitorCountTable.Arn
+
+  # Lambda Function
+  VisitorCounterFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: !Sub '${ProjectName}-visitor-counter'
+      Runtime: python3.11
+      Handler: index.lambda_handler
+      Role: !GetAtt VisitorCounterLambdaRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref VisitorCountTable
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+          from decimal import Decimal
+
+          dynamodb = boto3.resource('dynamodb')
+          table = dynamodb.Table(os.environ['TABLE_NAME'])
+
+          def lambda_handler(event, context):
+              try:
+                  # Increment visitor count
+                  response = table.update_item(
+                      Key={'id': 'visitor-count'},
+                      UpdateExpression='ADD #count :inc',
+                      ExpressionAttributeNames={'#count': 'count'},
+                      ExpressionAttributeValues={':inc': 1},
+                      ReturnValues='UPDATED_NEW'
+                  )
+                  
+                  count = int(response['Attributes']['count'])
+                  
+                  return {
+                      'statusCode': 200,
+                      'headers': {
+                          'Content-Type': 'application/json',
+                          'Access-Control-Allow-Origin': '*',
+                          'Access-Control-Allow-Methods': 'GET,OPTIONS',
+                          'Access-Control-Allow-Headers': 'Content-Type'
+                      },
+                      'body': json.dumps({
+                          'count': count,
+                          'message': 'Visitor count updated successfully'
+                      })
+                  }
+              except Exception as e:
+                  print(f"Error: {str(e)}")
+                  return {
+                      'statusCode': 500,
+                      'headers': {
+                          'Content-Type': 'application/json',
+                          'Access-Control-Allow-Origin': '*'
+                      },
+                      'body': json.dumps({
+                          'error': 'Failed to update visitor count',
+                          'message': str(e)
+                      })
+                  }
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-visitor-counter'
+        - Key: Project
+          Value: !Ref ProjectName
+
+  # Lambda Permission for API Gateway
+  VisitorCounterLambdaPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref VisitorCounterFunction
+      Action: 'lambda:InvokeFunction'
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${VisitorCounterApi}/*/*/*'
+
+  # API Gateway REST API
+  VisitorCounterApi:
+    Type: 'AWS::ApiGateway::RestApi'
+    Properties:
+      Name: !Sub '${ProjectName}-visitor-counter-api'
+      Description: 'API for visitor counter'
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+
+  # API Gateway Resource
+  VisitorCounterResource:
+    Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      RestApiId: !Ref VisitorCounterApi
+      ParentId: !GetAtt VisitorCounterApi.RootResourceId
+      PathPart: 'count'
+
+  # API Gateway GET Method
+  VisitorCounterGetMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      RestApiId: !Ref VisitorCounterApi
+      ResourceId: !Ref VisitorCounterResource
+      HttpMethod: GET
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${VisitorCounterFunction.Arn}/invocations'
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+
+  # API Gateway OPTIONS Method (for CORS)
+  VisitorCounterOptionsMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      RestApiId: !Ref VisitorCounterApi
+      ResourceId: !Ref VisitorCounterResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      Integration:
+        Type: MOCK
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+
+  # API Gateway Deployment
+  VisitorCounterDeployment:
+    Type: 'AWS::ApiGateway::Deployment'
+    DependsOn:
+      - VisitorCounterGetMethod
+      - VisitorCounterOptionsMethod
+    Properties:
+      RestApiId: !Ref VisitorCounterApi
+      StageName: prod
+
+Outputs:
+  ApiEndpoint:
+    Description: 'API Gateway endpoint URL for visitor counter'
+    Value: !Sub 'https://${VisitorCounterApi}.execute-api.${AWS::Region}.amazonaws.com/prod/count'
+    Export:
+      Name: !Sub '${AWS::StackName}-ApiEndpoint'
+
+  DynamoDBTableName:
+    Description: 'DynamoDB table name for visitor count'
+    Value: !Ref VisitorCountTable
+    Export:
+      Name: !Sub '${AWS::StackName}-TableName'
+
+  LambdaFunctionArn:
+    Description: 'Lambda function ARN'
+    Value: !GetAtt VisitorCounterFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-LambdaArn'
