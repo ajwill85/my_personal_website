@@ -4,7 +4,7 @@ Description: 'Contact Form API - Lambda + API Gateway for handling form submissi
 Parameters:
   SESFromEmail:
     Type: String
-    Default: teamconnoisseurww@gmail.com
+    Default: ajwilliams85@gmail.com
     Description: Verified SES email address for sending emails
 
 Resources:
@@ -37,7 +37,7 @@ Resources:
   ContactFormFunction:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: construct-contact-form-handler
+      FunctionName: ajwill-contact-form-handler
       Runtime: nodejs20.x
       Handler: index.handler
       Role: !GetAtt ContactFormLambdaRole.Arn
@@ -59,7 +59,7 @@ Resources:
   ContactFormApi:
     Type: AWS::ApiGatewayV2::Api
     Properties:
-      Name: construct-contact-form-api
+      Name: ajwill-contact-form-api
       ProtocolType: HTTP
       CorsConfiguration:
         AllowOrigins:

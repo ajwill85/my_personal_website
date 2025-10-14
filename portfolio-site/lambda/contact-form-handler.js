@@ -57,14 +57,14 @@ Message:
 ${message}
 
 ---
-This email was sent from the Construct Design Academy contact form.
+This email was sent from ajwill.ai contact form.
     `.trim();
 
     // Send email via SES
     const command = new SendEmailCommand({
-      Source: 'teamconnoisseurww@gmail.com',
+      Source: 'ajwilliams85@gmail.com',
       Destination: {
-        ToAddresses: ['teamconnoisseurww@gmail.com'],
+        ToAddresses: ['ajwilliams85@gmail.com'],
       },
       Message: {
         Subject: {
@@ -104,7 +104,7 @@ This email was sent from the Construct Design Academy contact form.
                     <p style="white-space: pre-wrap;">${message}</p>
                   </div>
                   <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;">
-                  <p style="font-size: 12px; color: #666;">This email was sent from the Construct Design Academy contact form.</p>
+                  <p style="font-size: 12px; color: #666;">This email was sent from ajwill.ai contact form.</p>
                 </body>
               </html>
             `,
