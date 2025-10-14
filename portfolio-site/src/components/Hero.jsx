@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="hero-text">
           <h1 className="hero-name">Akeem Williams</h1>
           <h2 className="hero-title">
-            Cybersecurity Consultant | ISO 27001 Lead Auditor | ISO 42001 Lead Auditor
+            GRC Engineer & ISO Lead Auditor (27001 & 42001) | AI Governance Specialist
           </h2>
           <p className="hero-location">Fresno, CA | Remote</p>
           <div className="hero-cta">
