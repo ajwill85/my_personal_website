@@ -64,12 +64,16 @@ const Skills = () => {
       skills: ['AWS Security', 'IAM & Access Management', 'CloudFormation IaC', 'AWS Lambda', 'API Gateway', 'S3 Security', 'CloudFront CDN']
     },
     {
+      title: 'Privacy & Data Protection',
+      skills: ['GDPR', 'CCPA', 'Privacy Impact Assessments (PIAs)', 'Data Subject Rights Management', 'Privacy by Design', 'Consent Management', 'Data Mapping & Classification']
+    },
+    {
       title: 'Compliance & Governance',
-      skills: ['ISO 27001 (ISMS)', 'ISO 42001 (AI Management)', 'ISO 27701 (Privacy)', 'NIST CSF', 'NIST RMF', 'AI/ML Governance', 'SOC 2']
+      skills: ['ISO 27001 (ISMS)', 'ISO 42001 (AI Management)', 'ISO 27701 (Privacy)', 'NIST CSF', 'NIST RMF', 'AI/ML Governance', 'SOC 2', 'GDPR Compliance', 'CCPA Compliance']
     },
     {
       title: 'GRC Capabilities',
-      skills: ['Risk Assessment & Management', 'Security Auditing', 'Policy Development', 'Compliance Management', 'Control Implementation', 'Security Architecture']
+      skills: ['Risk Assessment & Management', 'Security Auditing', 'Policy Development', 'Compliance Management', 'Control Implementation', 'Security Architecture', 'Data Privacy Management', 'Vendor Risk Management', 'Privacy Program Management']
     },
     {
       title: 'Programming & Automation',
