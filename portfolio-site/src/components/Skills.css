@@ -72,6 +72,36 @@
   text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
 }
 
+/* Certification Links */
+.cert-item {
+  padding: 0 !important;
+}
+
+.cert-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  color: #b8c5d6;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cert-link:hover {
+  color: #4facfe;
+  padding-left: 0.5rem;
+  text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+}
+
+.cert-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cert-link:hover .cert-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
