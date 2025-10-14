@@ -46,7 +46,7 @@ const Projects = () => {
       description: 'Built a modern React-based cybersecurity news aggregator with real-time intelligence from trusted sources including RSS feeds, Reddit r/netsec, and Hacker News. Features smart categorization across 15+ topics, offline caching, responsive design with dark theme, and smooth animations. Complete rewrite from static HTML to modern component architecture.',
       technologies: ['React', 'Vite', 'Lucide React', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'Cloudflare DNS'],
       liveLink: 'https://www.humanriskintel.com',
-      githubLink: null
+      githubLink: 'https://github.com/ajwill85/human-risk-intelligence'
     }
   ];
 
