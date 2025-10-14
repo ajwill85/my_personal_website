@@ -5,9 +5,9 @@
 
 set -e
 
-PROFILE="con"
-USER_NAME="construct-ses-mailer"
-POLICY_NAME="ConstructSESSendPolicy"
+PROFILE="ajwill"
+USER_NAME="ajwill-ses-mailer"
+POLICY_NAME="AJWillSESSendPolicy"
 
 echo "🔧 Creating IAM user for SES email sending..."
 echo "Profile: $PROFILE"
@@ -88,5 +88,5 @@ echo "⚠️  IMPORTANT: Save these credentials now!"
 echo "    The secret access key cannot be retrieved again."
 echo ""
 echo "📝 To automatically create .env.local, run:"
-echo "   ./aws-deployment-kit/scripts/create-env-file.sh \"$ACCESS_KEY_ID\" \"$SECRET_ACCESS_KEY\""
+echo "   ./scripts/create-env-file.sh \"$ACCESS_KEY_ID\" \"$SECRET_ACCESS_KEY\""
 echo ""
