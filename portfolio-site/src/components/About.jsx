@@ -32,15 +32,32 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
         <div className="about-content">
           <div className="about-text">
-            <p>
-              Hello, I'm Akeem Williams, a Governance, Risk, and Compliance (GRC) professional 
-              with a focus on AWS cloud security. I'm passionate about building secure cloud 
-              environments and ensuring compliance with industry standards and regulations.
+            <p className="intro">
+              I'm a <strong>GRC Engineer and ISO Lead Auditor</strong> specializing in AI governance, 
+              privacy controls, and cloud security automation. I bridge the gap between compliance 
+              requirements and technical implementation—turning regulatory frameworks into{' '}
+              <strong>automated, enforceable controls</strong>.
             </p>
+            
             <p>
-              I am a Certified Information Systems Security Professional (CISSP), ISO 27001 Lead 
-              Auditor, and ISO 42001 Lead Auditor with extensive experience in cybersecurity 
-              consulting and risk management.
+              My approach combines deep technical expertise with governance frameworks. I've built 
+              an <strong>AWS AI Governance Framework</strong> implementing 55+ automated controls 
+              using policy-as-code (OPA/Rego), developed serverless applications on AWS, and 
+              conducted ISO 27001/42001 audits for organizations navigating complex compliance landscapes.
+            </p>
+            
+            <p>
+              I'm a <strong>founding contributor to CSA's TAISE (Trusted AI Security and Ethics) 
+              certification</strong>, supporting the development of industry standards for AI security 
+              governance. As an <strong>OneTrust Fellow of Privacy Technology</strong> and <strong>CISSP</strong>, 
+              I bring a unique blend of privacy engineering, cloud security, and risk management. 
+              I'm passionate about making security and compliance practical, measurable, and 
+              integrated into the development lifecycle—not just checkboxes.
+            </p>
+            
+            <p className="cta">
+              Currently available for GRC engineering roles and consulting engagements focused on 
+              AI governance, privacy automation, and cloud security compliance.
             </p>
           </div>
         </div>

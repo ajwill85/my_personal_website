@@ -35,3 +35,34 @@ aws-credentials.txt
 # Build artifacts
 *.zip
 lambda-package.zip
+
+# Internal planning documents
+PORTFOLIO_RECOMMENDATIONS.md
+TODO.md
+NOTES.md
+*.draft.md
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# IDE files
+*.code-workspace
+.history/
+
+# Testing and coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Deployment scripts (if sensitive)
+# deploy-credentials.sh
+# aws-config.sh

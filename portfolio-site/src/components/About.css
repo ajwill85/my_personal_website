@@ -51,6 +51,35 @@
   margin-bottom: 1.5rem;
 }
 
+.about-text p.intro {
+  font-size: 1.2rem;
+  color: #e0e7f1;
+  font-weight: 500;
+}
+
+.about-text p.intro strong {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.about-text p.cta {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(79, 172, 254, 0.05);
+  border-left: 4px solid #4facfe;
+  border-radius: 4px;
+  color: #e0e7f1;
+  font-weight: 500;
+}
+
+.about-text strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .about {
     padding: 3rem 1.5rem;
