@@ -31,7 +31,10 @@ const Navigation = () => {
     <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="nav-brand">
-          <a href="#home" onClick={handleLinkClick}>AW</a>
+          <a href="#home" onClick={handleLinkClick}>
+            <img src="/favicon.jpg" alt="Akeem Williams" className="nav-brand-photo" />
+            <span>AW</span>
+          </a>
         </div>
 
         {/* Desktop Navigation */}
