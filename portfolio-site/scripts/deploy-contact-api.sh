@@ -5,11 +5,11 @@
 
 set -e
 
-PROFILE="con"
+PROFILE="ajwill"
 REGION="us-east-1"
-STACK_NAME="construct-contact-form-api"
-LAMBDA_DIR="aws-deployment-kit/lambda"
-FUNCTION_NAME="construct-contact-form-handler"
+STACK_NAME="ajwill-contact-form-api"
+LAMBDA_DIR="lambda"
+FUNCTION_NAME="ajwill-contact-form-handler"
 
 echo "🚀 Deploying Contact Form API..."
 echo "Profile: $PROFILE"
@@ -46,7 +46,7 @@ echo ""
 # Deploy CloudFormation stack
 echo "☁️  Deploying CloudFormation stack..."
 aws cloudformation deploy \
-  --template-file aws-deployment-kit/cloudformation/contact-form-api.yaml \
+  --template-file cloudformation/contact-form-api.yaml \
   --stack-name "$STACK_NAME" \
   --capabilities CAPABILITY_NAMED_IAM \
   --profile "$PROFILE" \
