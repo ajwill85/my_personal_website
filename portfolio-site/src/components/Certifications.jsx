@@ -105,6 +105,12 @@ const Certifications = () => {
         issuer: 'AWS',
         expected: 'Winter 2026',
         awsUrl: 'https://aws.amazon.com/certification/certified-developer-associate/'
+      },
+      {
+        name: 'ISO 27701 Lead Auditor',
+        issuer: 'TBD',
+        expected: '2026',
+        awsUrl: 'https://www.iso.org/standard/85819.html'
       }
     ]
   };
