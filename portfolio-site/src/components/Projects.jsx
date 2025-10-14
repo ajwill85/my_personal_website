@@ -29,7 +29,7 @@ const Projects = () => {
   const projects = [
     {
       name: 'AWS AI Governance Framework with Policy-as-Code',
-      description: 'Comprehensive security and compliance framework for AWS AI/ML systems implementing automated controls across ISO 27001, ISO 27701, and ISO 42001 standards. Features policy-as-code enforcement using Open Policy Agent (OPA/Rego), Python security scanners for SageMaker, IAM, and S3 resources, automated compliance monitoring, and risk scoring with JSON/HTML reporting. Demonstrates practical AI governance with 55+ controls mapped across multiple frameworks.',
+      description: 'Built AWS AI Governance Framework with 55+ automated controls, with the ability to reduce manual compliance checks by 80%. Comprehensive security and compliance framework for AWS AI/ML systems implementing automated controls across ISO 27001, ISO 27701, and ISO 42001 standards. Features policy-as-code enforcement using Open Policy Agent (OPA/Rego), Python security scanners for SageMaker, IAM, and S3 resources, automated compliance monitoring, and risk scoring with JSON/HTML reporting.',
       technologies: ['Python', 'AWS SageMaker', 'Open Policy Agent', 'Rego', 'boto3', 'IAM', 'KMS', 'S3', 'ISO 27001', 'ISO 27701', 'ISO 42001'],
       liveLink: null,
       githubLink: 'https://github.com/ajwill85/aws-ai-governance-framework'
