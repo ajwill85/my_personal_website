@@ -21,6 +21,7 @@ const Hero = () => {
           <p className="hero-location">Fresno, CA | Remote</p>
           <div className="hero-cta">
             <a href="#projects" className="btn btn-primary">View Projects</a>
+            <a href="/resume/Akeem_Williams_GRC_Engineer_Resume.pdf" className="btn btn-secondary" download>Download Resume</a>
             <a href="#contact" className="btn btn-secondary">Contact Me</a>
           </div>
         </div>
