@@ -147,10 +147,10 @@ const Contact = () => {
           </div>
 
           <div className="contact-methods">
-            <a href="mailto:contact@ajwill.ai" className="contact-card">
+            <a href="mailto:ajwilliams85@gmail.com" className="contact-card">
               <div className="contact-icon">✉️</div>
               <h3>Email</h3>
-              <p>contact@ajwill.ai</p>
+              <p>ajwilliams85@gmail.com</p>
             </a>
             
             <a href="https://linkedin.com/in/williamsakeem" target="_blank" rel="noopener noreferrer" className="contact-card">
