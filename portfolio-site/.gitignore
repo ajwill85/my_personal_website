@@ -53,6 +53,8 @@ NOTES.md
 # OS files
 Thumbs.db
 Desktop.ini
+._*
+.DS_Store
 
 # IDE files
 *.code-workspace
