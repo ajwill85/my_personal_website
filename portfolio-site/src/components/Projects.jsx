@@ -28,6 +28,13 @@ const Projects = () => {
 
   const projects = [
     {
+      name: 'GRC AI Governance Serverless Platform',
+      description: 'Enterprise-grade serverless GRC platform for AI governance and compliance automation. Built with AWS serverless architecture featuring Lambda functions, API Gateway, DynamoDB, and S3 for scalable, cost-effective operations. Implements automated compliance monitoring, risk assessment workflows, policy management, and audit trail capabilities. Designed for organizations managing AI/ML systems with regulatory requirements across ISO 27001, ISO 42001, and GDPR frameworks.',
+      technologies: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Python', 'Node.js', 'IAM', 'CloudWatch', 'EventBridge'],
+      liveLink: null,
+      githubLink: 'https://github.com/ajwill85/grc-ai-governance-serverless'
+    },
+    {
       name: 'AWS AI Governance Framework with Policy-as-Code',
       description: 'Built AWS AI Governance Framework with 55+ automated controls, with the ability to reduce manual compliance checks by 80%. Comprehensive security and compliance framework for AWS AI/ML systems implementing automated controls across ISO 27001, ISO 27701, and ISO 42001 standards. Features policy-as-code enforcement using Open Policy Agent (OPA/Rego), Python security scanners for SageMaker, IAM, and S3 resources, automated compliance monitoring, and risk scoring with JSON/HTML reporting.',
       technologies: ['Python', 'AWS SageMaker', 'Open Policy Agent', 'Rego', 'boto3', 'IAM', 'KMS', 'S3', 'ISO 27001', 'ISO 27701', 'ISO 42001'],
