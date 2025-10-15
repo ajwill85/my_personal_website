@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Contact.css';
 
-const CONTACT_API_ENDPOINT = 'https://lphfkvam87.execute-api.us-east-1.amazonaws.com/prod/contact';
+const CONTACT_API_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_API || '';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -73,7 +73,7 @@ const Contact = () => {
     } catch (error) {
       setFormStatus({
         type: 'error',
-        message: 'Failed to send message. Please email me directly at ajwilliams85@gmail.com'
+        message: 'Failed to send message. Please try again or use the email link below.'
       });
     } finally {
       setIsSubmitting(false);
@@ -147,10 +147,10 @@ const Contact = () => {
           </div>
 
           <div className="contact-methods">
-            <a href="mailto:ajwilliams85@gmail.com" className="contact-card">
+            <a href="mailto:contact@ajwill.ai" className="contact-card">
               <div className="contact-icon">✉️</div>
               <h3>Email</h3>
-              <p>ajwilliams85@gmail.com</p>
+              <p>contact@ajwill.ai</p>
             </a>
             
             <a href="https://linkedin.com/in/williamsakeem" target="_blank" rel="noopener noreferrer" className="contact-card">

@@ -9,7 +9,13 @@ const VisitorCounter = () => {
     // Using AWS Lambda + DynamoDB visitor counter
     const fetchCount = async () => {
       try {
-        const apiUrl = 'https://u2pg8kjps9.execute-api.us-east-1.amazonaws.com/prod/count';
+        const apiUrl = import.meta.env.VITE_VISITOR_COUNTER_API;
+        
+        if (!apiUrl) {
+          setCount('1000+');
+          setLoading(false);
+          return;
+        }
         
         const response = await fetch(apiUrl);
         const data = await response.json();
