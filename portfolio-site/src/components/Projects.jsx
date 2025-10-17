@@ -36,17 +36,10 @@ const Projects = () => {
     },
     {
       name: 'AWS AI Governance Framework with Policy-as-Code',
-      description: 'Built AWS AI Governance Framework with 55+ automated controls, with the ability to reduce manual compliance checks by 80%. Comprehensive security and compliance framework for AWS AI/ML systems implementing automated controls across ISO 27001, ISO 27701, and ISO 42001 standards. Features policy-as-code enforcement using Open Policy Agent (OPA/Rego), Python security scanners for SageMaker, IAM, and S3 resources, automated compliance monitoring, and risk scoring with JSON/HTML reporting.',
+      description: 'Multi-tenant SaaS platform for AWS AI/ML compliance monitoring with 67 automated controls across ISO 27001:2022 (30 controls), ISO 27701:2025 (22 controls), and ISO 42001:2023 (15 controls). Features policy-as-code enforcement using Open Policy Agent (OPA/Rego), Python security scanners for SageMaker, IAM, and S3 resources, threat intelligence integration, authentication enforcement, data masking for PII, secure coding validation, and AI impact assessments with JSON/HTML reporting.',
       technologies: ['Python', 'AWS SageMaker', 'Open Policy Agent', 'Rego', 'boto3', 'IAM', 'KMS', 'S3', 'ISO 27001', 'ISO 27701', 'ISO 42001'],
       liveLink: null,
       githubLink: 'https://github.com/ajwill85/aws-ai-governance-framework'
-    },
-    {
-      name: 'Portfolio Website with Serverless Visitor Counter',
-      description: 'Built a modern, responsive portfolio website with full AWS serverless architecture. Features a real-time visitor counter using Lambda functions, API Gateway, and DynamoDB for data persistence. Deployed with CloudFront CDN, S3 hosting, ACM SSL certificates, and custom domain via Cloudflare DNS. Includes dark mode theme, smooth scroll animations, and mobile-first design.',
-      technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'CloudFormation', 'Cloudflare DNS'],
-      liveLink: 'https://ajwill.ai',
-      githubLink: null
     },
     {
       name: 'Human Risk Intelligence v3.0 - Cybersecurity News Aggregator',
@@ -54,6 +47,13 @@ const Projects = () => {
       technologies: ['React', 'Vite', 'Lucide React', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'Cloudflare DNS'],
       liveLink: 'https://www.humanriskintel.com',
       githubLink: 'https://github.com/ajwill85/human-risk-intelligence'
+    },
+    {
+      name: 'Portfolio Website with Serverless Visitor Counter',
+      description: 'Built a modern, responsive portfolio website with full AWS serverless architecture. Features a real-time visitor counter using Lambda functions, API Gateway, and DynamoDB for data persistence. Deployed with CloudFront CDN, S3 hosting, ACM SSL certificates, and custom domain via Cloudflare DNS. Includes dark mode theme, smooth scroll animations, and mobile-first design.',
+      technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'CloudFormation', 'Cloudflare DNS'],
+      liveLink: 'https://ajwill.ai',
+      githubLink: null
     }
   ];
 
