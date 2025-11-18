@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
+# Uncomment to track package-lock.json
+# package-lock.json
 
 # Build outputs
 dist/
@@ -22,6 +23,10 @@ build/
 .DS_Store
 Thumbs.db
 ._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
 
 # Logs
 *.log
@@ -40,3 +45,13 @@ coverage/
 archived-deployment-files/
 resumes/
 *.pdf
+
+# AWS & Secrets
+*.pem
+*.key
+aws-credentials.json
+credentials.json
+
+# Lambda deployment artifacts
+lambda-deployment.zip
+*.zip
