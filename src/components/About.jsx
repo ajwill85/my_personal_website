@@ -47,7 +47,7 @@ const About = () => {
             </p>
             
             <p>
-              I'm a <strong>founding contributor to CSA's TAISE (Trusted AI Security and Ethics) 
+              I'm a <strong>founding contributor to CSA's TAISE (Trusted AI Safety Expert) 
               certification</strong>, supporting the development of industry standards for AI security 
               governance. As an <strong>OneTrust Fellow of Privacy Technology</strong> and <strong>CISSP</strong>, 
               I bring a unique blend of privacy engineering, cloud security, and risk management. 
