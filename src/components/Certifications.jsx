@@ -77,7 +77,7 @@ const Certifications = () => {
     ],
     inProgress: [
       {
-        name: 'TAISE (Trusted AI Security and Ethics)',
+        name: 'TAISE (Trusted AI Safety Expert)',
         issuer: 'Cloud Security Alliance',
         expected: '2025*',
         awsUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
@@ -185,7 +185,7 @@ const Certifications = () => {
           <div className="recognition-card">
             <h4>🏆 Founding Contributor</h4>
             <p>
-              <strong>CSA TAISE (Trusted AI Security and Ethics) Certification</strong>
+              <strong>CSA TAISE (Trusted AI Safety Expert) Certification</strong>
             </p>
             <p className="recognition-description">
               Supporting the development of industry standards for AI security governance
