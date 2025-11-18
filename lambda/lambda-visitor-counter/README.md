@@ -53,14 +53,14 @@ zip -r ../lambda-deployment.zip index.py
 
 # Deploy to AWS
 aws lambda update-function-code \
-  --function-name ajwill-portfolio-visitor-counter \
+  --function-name your-lambda-function-name \
   --zip-file fileb://lambda-deployment.zip
 ```
 
 ### Test
 ```bash
 # Test the API endpoint
-curl https://u2pg8kjps9.execute-api.us-east-1.amazonaws.com/prod/count
+curl https://your-api-id.execute-api.us-east-1.amazonaws.com/prod/count
 ```
 
 ## API Response
@@ -86,7 +86,7 @@ curl https://u2pg8kjps9.execute-api.us-east-1.amazonaws.com/prod/count
 ## Configuration
 
 ### Environment Variables
-- `TABLE_NAME`: `ajwill-portfolio-visitors` (DynamoDB table)
+- `TABLE_NAME`: Your DynamoDB table name (e.g., `portfolio-visitors`)
 
 ### IAM Permissions Required
 - `dynamodb:GetItem`

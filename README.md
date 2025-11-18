@@ -28,18 +28,59 @@ npm run preview
 
 ## 📁 Project Structure
 
-- **src/** - React source code and components
-- **public/** - Static assets
+```
+my_personal_website/
+├── src/              # React components and source code
+├── public/           # Static assets (favicon, images)
+├── lambda/           # AWS Lambda functions
+│   └── visitor-counter/  # Visitor counter Lambda
+├── docs/             # Project documentation
+├── dist/             # Build output (gitignored)
+└── .env.example      # Environment variables template
+```
+
+## 🚀 Deployment
+
+### Prerequisites
+
+1. Copy `.env.example` to `.env` and fill in your AWS values:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Configure AWS CLI with your profile:
+   ```bash
+   aws configure --profile your-profile-name
+   ```
+
+### Deploy to AWS
+
+```bash
+# Make deploy script executable (first time only)
+chmod +x archived-deployment-files/deploy-site.sh
+
+# Build and deploy
+./archived-deployment-files/deploy-site.sh
+```
+
+This will:
+- Build the React app
+- Upload to S3
+- Invalidate CloudFront cache
+- Site live in 1-2 minutes
 
 ## 📚 Documentation
 
 - **[.env.example](.env.example)** - Environment variables template
+- **[docs/PORTFOLIO_RECOMMENDATIONS.md](docs/PORTFOLIO_RECOMMENDATIONS.md)** - Portfolio enhancement suggestions
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 19, Vite
 - **Styling**: CSS3, Custom animations
-- **Hosting**: AWS S3 + CloudFront
+- **Backend**: AWS Lambda, API Gateway, DynamoDB
+- **Hosting**: AWS S3 + CloudFront CDN
+- **Infrastructure**: CloudFormation (IaC)
 
 ## 💡 Making Updates
 
