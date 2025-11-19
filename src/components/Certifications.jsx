@@ -77,28 +77,28 @@ const Certifications = () => {
     ],
     inProgress: [
       {
-        name: 'TAISE (Trusted AI Safety Expert)',
-        issuer: 'Cloud Security Alliance',
-        expected: '2025*',
-        awsUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
-      },
-      {
         name: 'AWS Certified Cloud Practitioner',
         issuer: 'AWS',
         expected: 'Winter 2025',
         awsUrl: 'https://aws.amazon.com/certification/certified-cloud-practitioner/'
       },
       {
-        name: 'AWS Certified AI Practitioner',
-        issuer: 'AWS',
-        expected: 'Spring 2026',
-        awsUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
+        name: 'TAISE (Trusted AI Safety Expert)',
+        issuer: 'Cloud Security Alliance',
+        expected: '2026*',
+        awsUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
       },
       {
         name: 'AWS Certified Security Specialty',
         issuer: 'AWS',
-        expected: 'Summer 2026',
+        expected: 'Spring 2026',
         awsUrl: 'https://aws.amazon.com/certification/certified-security-specialty/'
+      },
+      {
+        name: 'AWS Certified AI Practitioner',
+        issuer: 'AWS',
+        expected: 'Summer 2026',
+        awsUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
       },
       {
         name: 'AWS Certified Developer',
