@@ -5,7 +5,7 @@ Parameters:
   ProjectName:
     Type: String
     Description: 'Name for your project (used for resource naming)'
-    Default: 'ajwill-portfolio'
+    Default: 'my-portfolio'
     AllowedPattern: '^[a-z0-9-]+$'
     ConstraintDescription: 'Must contain only lowercase letters, numbers, and hyphens'
 

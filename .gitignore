@@ -54,3 +54,13 @@ credentials.json
 # Lambda deployment artifacts
 lambda-deployment.zip
 *.zip
+
+# Terraform (if used in future)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# CloudFormation outputs with sensitive data
+stack-outputs.json
+outputs.json
