@@ -1,11 +1,13 @@
 import json
 import boto3
 import hashlib
+import os
 from datetime import datetime, timedelta
 from decimal import Decimal
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ajwill-portfolio-visitors')
+table_name = os.environ.get('TABLE_NAME', 'portfolio-visitors')
+table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     """
