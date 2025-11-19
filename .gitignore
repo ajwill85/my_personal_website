@@ -64,3 +64,4 @@ lambda-deployment.zip
 # CloudFormation outputs with sensitive data
 stack-outputs.json
 outputs.json
+docs/PORTFOLIO_RECOMMENDATIONS.md

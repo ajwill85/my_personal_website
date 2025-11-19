@@ -49,11 +49,11 @@ const Projects = () => {
       githubLink: 'https://github.com/ajwill85/human-risk-intelligence'
     },
     {
-      name: 'Portfolio Website with Serverless Visitor Counter',
-      description: 'Built a modern, responsive portfolio website with full AWS serverless architecture. Features a real-time visitor counter using Lambda functions, API Gateway, and DynamoDB for data persistence. Deployed with CloudFront CDN, S3 hosting, ACM SSL certificates, and custom domain via Cloudflare DNS. Includes dark mode theme, smooth scroll animations, and mobile-first design.',
-      technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'CloudFormation', 'Cloudflare DNS'],
+      name: 'Portfolio Website with Serverless Backend',
+      description: 'Modern, responsive portfolio website with full AWS serverless architecture and Infrastructure as Code. Features real-time visitor counter with IP-based deduplication, contact form with SES email integration, and comprehensive CloudFormation templates for automated deployment. Includes CloudFront CDN, S3 hosting, ACM SSL certificates, Lambda functions, API Gateway, DynamoDB, and Cloudflare DNS integration. Built with security best practices, environment-based configuration, and complete CI/CD deployment scripts.',
+      technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'SES', 'CloudFormation', 'IaC', 'Cloudflare DNS'],
       liveLink: 'https://ajwill.ai',
-      githubLink: null
+      githubLink: 'https://github.com/ajwill85/my_personal_website'
     }
   ];
 
