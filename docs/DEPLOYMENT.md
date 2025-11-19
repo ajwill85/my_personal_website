@@ -169,7 +169,7 @@ Main deployment script that:
 
 **Example:**
 ```bash
-./scripts/deploy.sh ajwill-portfolio-bucket E1A2B3C4D5E6F default
+./scripts/deploy.sh your-bucket-name E1A2B3C4D5E6F your-profile
 ```
 
 ### bootstrap.sh

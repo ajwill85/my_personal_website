@@ -57,14 +57,17 @@ Message:
 ${message}
 
 ---
-This email was sent from ajwill.ai contact form.
+This email was sent from your portfolio contact form.
     `.trim();
 
     // Send email via SES
+    const fromEmail = process.env.FROM_EMAIL || 'noreply@example.com';
+    const toEmail = process.env.TO_EMAIL || 'contact@example.com';
+    
     const command = new SendEmailCommand({
-      Source: 'ajwilliams85@gmail.com',
+      Source: fromEmail,
       Destination: {
-        ToAddresses: ['ajwilliams85@gmail.com'],
+        ToAddresses: [toEmail],
       },
       Message: {
         Subject: {
@@ -104,7 +107,7 @@ This email was sent from ajwill.ai contact form.
                     <p style="white-space: pre-wrap;">${message}</p>
                   </div>
                   <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;">
-                  <p style="font-size: 12px; color: #666;">This email was sent from ajwill.ai contact form.</p>
+                  <p style="font-size: 12px; color: #666;">This email was sent from your portfolio contact form.</p>
                 </body>
               </html>
             `,

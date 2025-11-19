@@ -4,7 +4,7 @@ Description: 'Infrastructure for hosting a React/Vite website on S3 with CloudFr
 Parameters:
   DomainName:
     Type: String
-    Description: 'Your domain name (e.g., ajwill.ai)'
+    Description: 'Your domain name (e.g., example.com)'
     AllowedPattern: '^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]\.[a-z]{2,}$'
     ConstraintDescription: 'Must be a valid domain name'
   
