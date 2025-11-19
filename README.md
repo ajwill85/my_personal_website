@@ -33,9 +33,13 @@ my_personal_website/
 ├── src/              # React components and source code
 ├── public/           # Static assets (favicon, images)
 ├── lambda/           # AWS Lambda functions
-│   └── visitor-counter/  # Visitor counter Lambda
+│   ├── visitor-counter/  # Visitor counter Lambda
+│   └── contact-form/     # Contact form Lambda
+├── infrastructure/   # CloudFormation IaC templates
+├── scripts/          # Deployment and setup scripts
 ├── docs/             # Project documentation
 ├── dist/             # Build output (gitignored)
+├── deploy.sh         # Main deployment script
 └── .env.example      # Environment variables template
 ```
 
@@ -57,10 +61,10 @@ my_personal_website/
 
 ```bash
 # Make deploy script executable (first time only)
-chmod +x archived-deployment-files/deploy-site.sh
+chmod +x deploy.sh
 
 # Build and deploy
-./archived-deployment-files/deploy-site.sh
+./deploy.sh
 ```
 
 This will:
@@ -72,7 +76,9 @@ This will:
 ## 📚 Documentation
 
 - **[.env.example](.env.example)** - Environment variables template
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Detailed deployment guide
 - **[docs/PORTFOLIO_RECOMMENDATIONS.md](docs/PORTFOLIO_RECOMMENDATIONS.md)** - Portfolio enhancement suggestions
+- **[infrastructure/](infrastructure/)** - CloudFormation templates for AWS resources
 
 ## 🛠️ Tech Stack
 
