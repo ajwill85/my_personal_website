@@ -28,28 +28,65 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: 'Cloud Security & Architecture',
-      skills: ['AWS Security', 'IAM & Access Management', 'CloudFormation IaC', 'AWS Lambda', 'API Gateway', 'S3 Security', 'CloudFront CDN']
-    },
-    {
-      title: 'Privacy & Data Protection',
-      skills: ['GDPR', 'CCPA', 'Privacy Impact Assessments (PIAs)', 'Data Subject Rights Management', 'Privacy by Design', 'Consent Management', 'Data Mapping & Classification']
-    },
-    {
-      title: 'Compliance & Governance',
-      skills: ['ISO 27001 (ISMS)', 'ISO 42001 (AI Management)', 'ISO 27701 (Privacy)', 'NIST CSF', 'NIST RMF', 'AI/ML Governance', 'SOC 2', 'GDPR Compliance', 'CCPA Compliance']
-    },
-    {
-      title: 'GRC Capabilities',
-      skills: ['Risk Assessment & Management', 'Security Auditing', 'Policy Development', 'Compliance Management', 'Control Implementation', 'Security Architecture', 'Data Privacy Management', 'Vendor Risk Management', 'Privacy Program Management']
+      title: 'Cloud Security & Infrastructure',
+      skills: [
+        'AWS Serverless (Lambda, API Gateway, DynamoDB, S3, SES)',
+        'AWS Security (IAM, KMS, CloudTrail, CloudWatch)',
+        'AWS AI/ML (SageMaker)',
+        'Infrastructure as Code (CloudFormation)',
+        'CI/CD Pipelines',
+        'CloudFront CDN & ACM',
+        'EventBridge & Event-Driven Architecture',
+        'DNS Management (Cloudflare) & SSL/TLS'
+      ]
     },
     {
       title: 'Programming & Automation',
-      skills: ['Python', 'Bash', 'JavaScript', 'React', 'Policy-as-Code (OPA/Rego)']
+      skills: [
+        'Python (boto3)',
+        'JavaScript (Node.js, React, Vite)',
+        'Bash Scripting',
+        'Policy-as-Code (OPA/Rego)'
+      ]
     },
     {
-      title: 'Professional Skills',
-      skills: ['Technical Writing', 'Project Management', 'Stakeholder Communication', 'Security Training']
+      title: 'Compliance & Governance',
+      skills: [
+        'ISO Standards (27001, 42001, 27701)',
+        'NIST Frameworks (CSF, RMF)',
+        'Privacy Regulations (GDPR, CCPA)',
+        'AI/ML Governance',
+        'SOC 2'
+      ]
+    },
+    {
+      title: 'Privacy & Data Protection',
+      skills: [
+        'Privacy Impact Assessments (PIAs)',
+        'Data Subject Rights & Consent Management',
+        'Privacy by Design & Data Mapping',
+        'PII Protection & Data Masking',
+        'Privacy Program Management'
+      ]
+    },
+    {
+      title: 'Risk & Security Management',
+      skills: [
+        'Risk Assessment & Management',
+        'Security Auditing & Control Implementation',
+        'Policy Development & Compliance Management',
+        'Security Architecture',
+        'Third-Party Risk Management (TPRM)'
+      ]
+    },
+    {
+      title: 'Leadership & Communication',
+      skills: [
+        'Technical Writing & Documentation',
+        'Project Management',
+        'Stakeholder Communication',
+        'Security Training & Awareness'
+      ]
     }
   ];
 
