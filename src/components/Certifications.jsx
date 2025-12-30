@@ -67,7 +67,7 @@ const Certifications = () => {
     {
       name: 'Certified Information Systems Auditor (CISA)',
       issuer: 'ISACA',
-      expected: '2026',
+      expected: 'Summer 2026',
       category: 'security',
       inProgress: true,
       certUrl: 'https://www.isaca.org/credentialing/cisa'
@@ -91,15 +91,14 @@ const Certifications = () => {
     {
       name: 'AWS Certified Cloud Practitioner',
       issuer: 'AWS',
-      expected: 'Winter 2025',
+      year: '2025',
       category: 'cloud',
-      inProgress: true,
-      certUrl: 'https://aws.amazon.com/certification/certified-cloud-practitioner/'
+      certUrl: 'https://www.credly.com/badges/2d075048-9a61-43d9-8b97-58ff84aa0555'
     },
     {
       name: 'TAISE (Trusted AI Safety Expert)',
       issuer: 'Cloud Security Alliance',
-      expected: '2026*',
+      expected: 'Spring 2026',
       category: 'cloud',
       inProgress: true,
       certUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
@@ -132,7 +131,7 @@ const Certifications = () => {
     {
       name: 'ISO 27701 Lead Auditor (PIMS)',
       issuer: 'TBD',
-      expected: '2026',
+      expected: 'Winter 2026',
       category: 'privacy',
       inProgress: true,
       certUrl: 'https://www.iso.org/standard/85819.html'

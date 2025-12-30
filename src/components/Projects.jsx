@@ -54,6 +54,14 @@ const Projects = () => {
       technologies: ['React', 'Vite', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'SES', 'CloudFormation', 'IaC', 'Cloudflare DNS'],
       liveLink: 'https://ajwill.ai',
       githubLink: 'https://github.com/ajwill85/my_personal_website'
+    },
+    {
+      name: 'Trading Sentiment Analysis Platform',
+      description: 'Private project in active development. An AI-powered platform for market sentiment analysis and trading insights.',
+      technologies: ['Python', 'React', 'TypeScript', 'FastAPI', 'NLP/Vader', 'PostgreSQL', 'AWS Fargate', 'AWS ECS', 'Docker', 'GitHub Actions', 'Terraform'],
+      liveLink: null,
+      githubLink: null,
+      stealth: true
     }
   ];
 
@@ -65,11 +73,14 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={index} 
-              className="project-card"
+              className={`project-card ${project.stealth ? 'stealth' : ''}`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="project-content">
-                <h3>{project.name}</h3>
+                <h3>
+                  {project.name}
+                  {project.stealth && <span className="stealth-badge">🔒 Private</span>}
+                </h3>
                 <p className="project-description">{project.description}</p>
                 <div className="project-tech">
                   {project.technologies.map((tech, techIndex) => (
