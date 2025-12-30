@@ -40,10 +40,10 @@ const About = () => {
             </p>
             
             <p>
-              My approach combines deep technical expertise with governance frameworks. I've built 
-              an <strong>AWS AI Governance Framework</strong> implementing 55+ automated controls 
+              My approach combines technical expertise with governance frameworks. I've built 
+              an <strong>AWS AI Governance Framework</strong> implementing 67+ automated controls 
               using policy-as-code (OPA/Rego), developed serverless applications on AWS, and 
-              conducted ISO 27001/42001 audits for organizations navigating complex compliance landscapes.
+              certified to conduct ISO 27001/42001 audits for organizations navigating complex compliance landscapes.
             </p>
             
             <p>
