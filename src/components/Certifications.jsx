@@ -1,36 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
 import './Certifications.css';
 
 const Certifications = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
 
   const categories = [
     { id: 'security', name: 'Security & Governance' },
     { id: 'cloud', name: 'Cloud & AI' },
-    { id: 'privacy', name: 'Privacy & Compliance' },
-    { id: 'leadership', name: 'Leadership & Recognition' }
+    { id: 'privacy', name: 'Privacy & Compliance' }
   ];
 
   const certifications = [
@@ -136,30 +111,14 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://www.iso.org/standard/85819.html'
     },
-    {
-      name: 'GIAC Advisory Board Member',
-      issuer: 'GIAC',
-      year: '2023',
-      category: 'leadership',
-      certUrl: 'https://www.credly.com/badges/9edca151-4ece-4edf-aca0-dac53b796df1'
-    },
-    {
-      name: 'TAISE Founding Contributor',
-      issuer: 'Cloud Security Alliance',
-      year: '2025',
-      category: 'leadership',
-      highlight: true,
-      details: 'Supporting the development of industry standards for AI security governance',
-      certUrl: 'https://cloudsecurityalliance.org/education/taise-donors'
-    }
-  ];
+      ];
 
   const getCertsByCategory = (categoryId) => {
     return certifications.filter(cert => cert.category === categoryId);
   };
 
   return (
-    <section className={`certifications ${isVisible ? 'visible' : ''}`} id="certifications" ref={sectionRef}>
+    <section className="certifications visible" id="certifications">
       <div className="container">
         <h2 className="section-title">Certifications</h2>
         
@@ -189,7 +148,19 @@ const Certifications = () => {
                       {cert.details && <p className="cert-details">{cert.details}</p>}
                       {cert.inProgress && <span className="cert-status-badge">In Progress</span>}
                       <span className={`cert-link-indicator ${cert.inProgress ? 'info' : 'verify'}`}>
-                        <span className="cert-link-icon">{cert.inProgress ? '📚' : '🏆'}</span>
+                        <span className="cert-link-icon">
+                          {cert.inProgress ? (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                            </svg>
+                          ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="8" r="7"/>
+                              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                            </svg>
+                          )}
+                        </span>
                         <span className="cert-link-text">{cert.inProgress ? 'Info' : 'Verify'}</span>
                       </span>
                     </a>

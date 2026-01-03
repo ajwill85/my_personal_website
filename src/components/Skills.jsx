@@ -1,30 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
 import './Skills.css';
 
 const Skills = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
 
   const skillCategories = [
     {
@@ -91,7 +67,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className={`skills ${isVisible ? 'visible' : ''}`} id="skills" ref={sectionRef}>
+    <section className="skills visible" id="skills">
       <div className="container">
         <h2 className="section-title">Skills & Expertise</h2>
         <div className="skills-grid">
@@ -99,7 +75,6 @@ const Skills = () => {
             <div 
               key={index} 
               className="skill-category"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <h3>{category.title}</h3>
               <ul>

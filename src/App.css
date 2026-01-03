@@ -1,7 +1,3 @@
-.app {
-  min-height: 100vh;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -12,17 +8,22 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
 .footer {
-  background: #0a0e27;
-  color: #4facfe;
+  background: #161b22;
+  color: #8b949e;
   text-align: center;
-  padding: 3rem 2rem 2rem;
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(79, 172, 254, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  padding: 2rem;
+  font-size: 0.875rem;
+  border-top: 1px solid #30363d;
+  margin-top: 4rem;
 }
 
 .footer p {

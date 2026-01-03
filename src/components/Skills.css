@@ -1,52 +1,42 @@
 .skills {
-  padding: 5rem 2rem;
-  background: #1a1f3a;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
-}
-
-.skills.visible {
+  padding: 4rem 0;
+  background: #0d1117;
   opacity: 1;
   transform: translateY(0);
+  border-bottom: 1px solid #30363d;
 }
 
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 1.5rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 2rem;
 }
 
 .skill-category {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.05) 100%);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(79, 172, 254, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: #161b22;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #30363d;
   transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.skills.visible .skill-category {
   opacity: 1;
   transform: translateY(0);
 }
 
 .skill-category:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
-  border-color: rgba(79, 172, 254, 0.5);
+  transform: translateY(-4px) scale(1.02);
+  border-color: #58a6ff;
+  box-shadow: 0 8px 25px rgba(88, 166, 255, 0.3);
 }
 
 .skill-category h3 {
-  font-size: 1.5rem;
-  color: #4facfe;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
+  font-size: 1.125rem;
+  color: #58a6ff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
 .skill-category ul {
@@ -55,11 +45,12 @@
 }
 
 .skill-category li {
-  padding: 0.75rem 0;
-  color: #b8c5d6;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(79, 172, 254, 0.1);
-  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  color: #e6edf3;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #30363d;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
 }
 
 .skill-category li:last-child {
@@ -67,9 +58,8 @@
 }
 
 .skill-category li:hover {
-  color: #4facfe;
-  padding-left: 0.5rem;
-  text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+  color: #58a6ff;
+  padding-left: 0.25rem;
 }
 
 /* Certification Links */
@@ -81,45 +71,58 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 0;
-  color: #b8c5d6;
+  padding: 0.5rem 0;
+  color: #e6edf3;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .cert-link:hover {
-  color: #4facfe;
-  padding-left: 0.5rem;
-  text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+  color: #58a6ff;
+  padding-left: 0.25rem;
 }
 
 .cert-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
 }
 
 .cert-link:hover .cert-icon {
-  transform: scale(1.2) rotate(10deg);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
   .skills {
-    padding: 3rem 1.5rem;
+    padding: 2rem 1rem;
   }
   
   .skills-grid {
+    padding: 0 1rem;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
+  }
+  
+  .skill-category {
+    padding: 1.5rem;
+    min-height: 160px;
+  }
+  
+  .skill-category:hover {
+    transform: translateY(-3px) scale(1.01);
+  }
+  
+  .skill-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .skill-category ul {
+    gap: 0.75rem;
+  }
+  
+  .skill-category li {
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    line-height: 1.5;
   }
 }
