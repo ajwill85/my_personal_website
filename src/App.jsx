@@ -1,30 +1,40 @@
-import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Certifications from './components/Certifications'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
+import { useState, useEffect } from 'react'
+import Layout from './components/Layout'
+import Router from './components/Router'
 import VisitorCounter from './components/VisitorCounter'
 import './App.css'
 
 function App() {
+  const [currentRoute, setCurrentRoute] = useState('home')
+
+  // Handle URL hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) || 'home'
+      setCurrentRoute(hash)
+    }
+
+    // Set initial route from hash
+    handleHashChange()
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  const handleNavigate = (route) => {
+    window.location.hash = route
+    setCurrentRoute(route)
+  }
+
   return (
-    <div className="app">
-      <Navigation />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Experience />
-      <Contact />
+    <Layout currentRoute={currentRoute} onNavigate={handleNavigate}>
+      <Router />
       <footer className="footer">
         <VisitorCounter />
         <p>&copy; {new Date().getFullYear()} Akeem Williams. All rights reserved.</p>
       </footer>
-    </div>
+    </Layout>
   )
 }
 

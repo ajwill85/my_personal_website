@@ -38,7 +38,12 @@ const VisitorCounter = () => {
   if (loading) {
     return (
       <div className="visitor-counter loading">
-        <div className="counter-icon">👁️</div>
+        <div className="counter-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
         <div className="counter-text">
           <span className="counter-label">Loading visitors...</span>
         </div>
@@ -48,7 +53,12 @@ const VisitorCounter = () => {
 
   return (
     <div className="visitor-counter">
-      <div className="counter-icon">👁️</div>
+      <div className="counter-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
       <div className="counter-text">
         <span className="counter-value">{count?.toLocaleString()}</span>
         <span className="counter-label">Total Visitors</span>

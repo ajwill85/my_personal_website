@@ -1,6 +1,6 @@
-# Portfolio Site Deployment Guide
+# IDE-Style Portfolio Site Deployment Guide
 
-This folder contains everything needed to develop, build, and deploy your portfolio website to AWS.
+This folder contains everything needed to develop, build, and deploy your IDE-style portfolio website with blog functionality, enhanced visual interactions, and mobile optimization to AWS.
 
 ## 📁 Project Structure
 
@@ -8,8 +8,29 @@ This folder contains everything needed to develop, build, and deploy your portfo
 portfolio-site/
 ├── src/                          # React source code
 │   ├── components/               # React components
-│   ├── assets/                   # Images, fonts, etc.
-│   └── main.jsx                  # App entry point
+│   │   ├── Layout.jsx           # IDE layout with sidebar navigation
+│   │   ├── Router.jsx           # Hash-based routing system
+│   │   ├── Blog.jsx             # Blog listing component
+│   │   ├── Blog/
+│   │   │   └── BlogPost.jsx     # Individual blog post component
+│   │   ├── Hero.jsx             # Hero section with centered layout and about content
+│   │   ├── Skills.jsx           # Skills section
+│   │   ├── Projects.jsx         # Projects section
+│   │   ├── Certifications.jsx   # Certifications section
+│   │   ├── Experience.jsx       # Experience section
+│   │   ├── Contact.jsx          # Contact section
+│   │   ├── Navigation.jsx        # Navigation component
+│   │   └── VisitorCounter.jsx    # Visitor counter component
+│   ├── lib/
+│   │   └── blog.js              # Blog data management
+│   ├── content/
+│   │   └── blog/                # Blog post markdown files
+│   │       ├── ai-governance-framework.md
+│   │       ├── policy-as-code-guide.md
+│   │       ├── grc-ai-governance-serverless-platform.md
+│   │       ├── fire-calculator-retirement-app.md
+│   │       └── trading-sentiment-analysis-platform.md
+│   └── App.jsx                  # Main application component
 ├── public/                       # Static assets
 ├── dist/                         # Build output (generated)
 ├── cloudformation/               # AWS infrastructure templates
@@ -26,12 +47,13 @@ portfolio-site/
 │   └── visitor-counter/          # Visitor counter Lambda
 ├── package.json                  # Node dependencies
 ├── vite.config.js                # Vite build config
+├── BLOG_POST_GUIDE.md            # Blog creation guide
 └── DEPLOYMENT.md                 # This file
 ```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Development
 
@@ -67,7 +89,7 @@ npm run preview
 
 ---
 
-## 📝 Making Content Updates
+## Making Content Updates
 
 ### 1. Update Project Information
 
@@ -87,18 +109,47 @@ const projects = [
 
 ### 2. Update Other Sections
 
-- **About**: `src/components/About.jsx`
 - **Skills**: `src/components/Skills.jsx`
 - **Contact**: `src/components/Contact.jsx`
-- **Hero**: `src/components/Hero.jsx`
+- **Hero**: `src/components/Hero.jsx` (includes about content)
+- **Thought Leadership & Recognition**: `src/components/Experience.jsx`
 
-### 3. Test Locally
+### 3. Blog System Management
+
+#### Adding Blog Posts
+
+1. **Create markdown file** in `src/content/blog/your-post-slug.md`
+2. **Add front matter** with title, date, category, excerpt, tags
+3. **Update blog data** in `src/lib/blog.js`
+4. **Add content** to `getBlogPostContent()` function
+
+**See `BLOG_POST_GUIDE.md` for detailed step-by-step instructions.**
+
+#### Blog File Locations
+
+- **Blog Posts**: `src/content/blog/*.md`
+- **Blog Data**: `src/lib/blog.js`
+- **Blog Components**: `src/components/Blog.jsx`, `src/components/Blog/BlogPost.jsx`
+- **Blog Guide**: `BLOG_POST_GUIDE.md`
+
+#### Blog Categories & Tags
+
+**Categories**: GRC, DevOps, AI/ML, Personal Finance, Projects
+**Tags**: AWS, React, Python, Serverless, Policy-as-Code, etc.
+
+### 4. Test Locally
 
 ```bash
 npm run dev
 ```
 
-### 4. Build and Deploy
+**Test IDE Features:**
+- **Sidebar Navigation**: Click menu items to switch content
+- **Blog Functionality**: Test blog posts, filtering, navigation
+- **Responsive Design**: Test mobile hamburger menu
+- **Hash Routing**: Verify URL updates (#home, #about, #blog/post-slug)
+
+### 5. Build and Deploy
 
 ```bash
 # Build
@@ -110,7 +161,7 @@ npm run build
 
 ---
 
-## 🏗️ AWS Infrastructure
+## AWS Infrastructure
 
 ### Current Setup
 
@@ -153,7 +204,7 @@ aws cloudformation describe-stacks \
 
 ---
 
-## 🔧 Deployment Scripts
+## Deployment Scripts
 
 ### deploy.sh
 
@@ -195,7 +246,7 @@ Validates CloudFormation templates before deployment:
 
 ---
 
-## 📦 Complete Deployment Workflow
+## Complete Deployment Workflow
 
 ### First Time Setup (Already Done)
 
@@ -216,7 +267,7 @@ Validates CloudFormation templates before deployment:
 
 ---
 
-## 🔍 Finding Your AWS Resources
+## Finding Your AWS Resources
 
 ### Bucket Name
 
@@ -241,7 +292,7 @@ aws cloudformation describe-stacks \
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Changes Not Showing Up
 
@@ -284,7 +335,7 @@ This is already handled in CloudFormation template with error responses that red
 
 ---
 
-## 💡 Tips & Best Practices
+## Tips & Best Practices
 
 ### Development
 
@@ -300,7 +351,6 @@ This is already handled in CloudFormation template with error responses that red
 - Keep your AWS credentials secure (never commit them)
 
 ### Performance
-
 - Optimize images before adding them
 - Use WebP format for images when possible
 - Lazy load components with React.lazy()
@@ -315,7 +365,7 @@ This is already handled in CloudFormation template with error responses that red
 
 ---
 
-## 📊 Monitoring & Analytics
+## Monitoring & Analytics
 
 ### CloudWatch Metrics
 
@@ -341,7 +391,7 @@ Enable CloudFront logging in the CloudFormation template to track:
 
 ---
 
-## 💰 Cost Tracking
+## Cost Tracking
 
 ### Current AWS Services
 
@@ -360,7 +410,7 @@ Enable CloudFront logging in the CloudFormation template to track:
 
 ---
 
-## 🔄 CI/CD (Optional)
+## CI/CD (Optional)
 
 ### GitHub Actions Example
 
@@ -397,7 +447,7 @@ jobs:
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Vite Documentation](https://vitejs.dev/)
 - [React Documentation](https://react.dev/)
@@ -406,7 +456,7 @@ jobs:
 
 ---
 
-## 🎯 Quick Reference
+## Quick Reference
 
 ### Common Commands
 
@@ -428,15 +478,68 @@ aws cloudformation describe-stacks ...          # Get stack info
 
 ### File Locations
 
-- **Components**: `src/components/`
-- **Styles**: `src/components/*.css` or `src/*.css`
+- **Main Components**: `src/components/`
+- **Blog Components**: `src/components/Blog.jsx`, `src/components/Blog/BlogPost.jsx`
+- **Layout & Routing**: `src/components/Layout.jsx`, `src/components/Router.jsx`
+- **Thought Leadership & Recognition**: `src/components/Experience.jsx`
+- **Blog Data**: `src/lib/blog.js`
+- **Blog Content**: `src/content/blog/*.md`
+- **Styles**: `src/components/*.css`
 - **Assets**: `src/assets/` or `public/`
 - **Build Output**: `dist/`
 - **CloudFormation**: `cloudformation/`
 - **Scripts**: `scripts/`
+- **Blog Guide**: `BLOG_POST_GUIDE.md`
 
 ---
 
-**Need help?** Check the troubleshooting section or refer to the original `aws-deployment-kit` folder for detailed guides.
+## IDE Portfolio Features
+
+### Layout & Navigation
+- **IDE-Style Layout**: 180px fixed sidebar with main content area
+- **Hash-based Routing**: #home, #about, #skills, #projects, #blog, #certifications, #experience, #contact
+- **Blog Routing**: #blog/post-slug for individual posts
+- **Filtering**: Click categories/tags to filter blog posts
+- **Responsive Design**: Mobile hamburger menu for screens <768px
+- **Centered Hero**: Professional centered layout for main content
+
+### Enhanced Visual Design
+- **SVG Icon System**: Professional icons replacing all emojis
+- **Consistent Interactions**: Uniform hover effects across all pages
+- **Smooth Animations**: 0.3s transitions with enhanced effects
+- **Modern Micro-interactions**: Scale transforms and shadow effects
+- **Visual Polish**: Contemporary design with depth and movement
+
+### Mobile Optimization
+- **Touch-Friendly**: 44px minimum touch targets
+- **Optimized Layouts**: Single-column grids on mobile
+- **Enhanced Readability**: Proper line heights and spacing
+- **Performance**: Optimized for mobile devices
+- **Consistent UX**: Unified mobile experience
+
+### Blog System
+- **5 Blog Posts**: AI Governance, Policy-as-Code, GRC Serverless Platform, FIRE Calculator, Trading Sentiment Platform
+- **Category Filtering**: Filter by GRC, DevOps, AI/ML, Personal Finance, Projects
+- **Tag Filtering**: Filter by specific technology tags
+- **Full Content**: Complete blog posts with code examples and technical details
+- **Navigation**: Back to blog, top/bottom navigation in posts
+
+### Thought Leadership & Recognition
+- **External Publications**: Articles, white papers, and contributions
+- **Speaking Engagements**: Conference presentations and panels
+- **Professional Recognition**: Industry certifications and standards work
+- **External Validation**: Third-party publications and media features
+- **Leadership Roles**: Board memberships and committee positions
+
+### IDE Theme
+- **GitHub Dark Theme**: #0d1117 background, #58a6ff accent colors
+- **Monospace Headers**: SF Mono, Monaco font for code-like appearance
+- **Border Styling**: Subtle #30363d borders between sections
+- **Professional Aesthetic**: Clean, technical IDE appearance
+- **Modern Polish**: Enhanced visual effects and interactions
+
+---
+
+**Need help?** Check the troubleshooting section, refer to `BLOG_POST_GUIDE.md` for blog creation, or see the original `aws-deployment-kit` folder for detailed AWS guides.
 
 **Happy deploying!** 🚀

@@ -1,59 +1,51 @@
-import { useEffect, useRef, useState } from 'react';
 import './Experience.css';
 
 const Experience = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
-  const articles = [
+  const publications = [
     {
       title: 'Is Security Awareness a Dirty Word?',
-      link: 'https://humanriskintel.beehiiv.com/p/human-risk-management-security-awareness-is-a-dirty-word'
+      publication: 'Human Risk Management',
+      link: 'https://humanriskintel.beehiiv.com/p/human-risk-management-security-awareness-is-a-dirty-word',
+      date: '2024-01-15',
+      type: 'Article'
+    },
+    {
+      title: 'GIAC Advisory Board Member',
+      publication: 'Global Information Assurance Certification',
+      link: 'https://www.credly.com/badges/9edca151-4ece-4edf-aca0-dac53b796df1',
+      date: '2023',
+      type: 'Leadership'
+    },
+    {
+      title: 'TAISE Founding Contributor',
+      publication: 'Cloud Security Alliance',
+      link: 'https://cloudsecurityalliance.org/education/taise-donors',
+      date: '2025',
+      type: 'Contribution'
     }
   ];
 
   return (
-    <section className={`experience ${isVisible ? 'visible' : ''}`} id="experience" ref={sectionRef}>
+    <section className="experience visible" id="experience">
       <div className="container">
-        <h2 className="section-title">Featured Articles</h2>
+        <h2 className="section-title">Thought Leadership & Recognition</h2>
         
-        <div className="experience-content">
-          <div className="articles">
-            <ul className="article-list">
-              {articles.map((article, index) => (
-                <li key={index}>
-                  <a 
-                    href={article.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    {article.title} →
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="publications-grid">
+          {publications.map((pub, index) => (
+            <article key={index} className="publication-card">
+              <div className="publication-header">
+                <span className="publication-type">{pub.type}</span>
+                <span className="publication-date">{pub.date}</span>
+              </div>
+              <h3 className="publication-title">
+                <a href={pub.link} target="_blank" rel="noopener noreferrer">
+                  {pub.title}
+                </a>
+              </h3>
+              <p className="publication-source">{pub.publication}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

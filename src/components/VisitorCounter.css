@@ -21,8 +21,18 @@
 }
 
 .counter-icon {
-  font-size: 2rem;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4facfe;
   animation: pulse 2s ease-in-out infinite;
+}
+
+.counter-icon svg {
+  width: 16px;
+  height: 16px;
 }
 
 @keyframes pulse {
