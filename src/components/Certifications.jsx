@@ -10,6 +10,7 @@ const Certifications = () => {
   ];
 
   const certifications = [
+    // Security and Risk certs
     {
       name: 'Certified Information Systems Security Professional (CISSP)',
       issuer: 'ISC2',
@@ -48,14 +49,7 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://www.isaca.org/credentialing/cisa'
     },
-    {
-      name: 'AWS Certified Security Specialty',
-      issuer: 'AWS',
-      expected: 'Spring 2026',
-      category: 'cloud',
-      inProgress: true,
-      certUrl: 'https://aws.amazon.com/certification/certified-security-specialty/'
-    },
+    // AI certs
     {
       name: 'ISO 42001 Lead Auditor (AIMS)',
       issuer: 'Mastermind Assurance',
@@ -63,13 +57,6 @@ const Certifications = () => {
       category: 'ai',
       highlight: true,
       certUrl: 'https://www.credly.com/badges/e7430cff-b1a1-4980-af63-3ce72bde04c4'
-    },
-    {
-      name: 'AWS Certified Cloud Practitioner',
-      issuer: 'AWS',
-      year: '2025',
-      category: 'cloud',
-      certUrl: 'https://www.credly.com/badges/2d075048-9a61-43d9-8b97-58ff84aa0555'
     },
     {
       name: 'TAISE (Trusted AI Safety Expert)',
@@ -87,6 +74,22 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
     },
+    // Cloud certs
+    {
+      name: 'AWS Certified Cloud Practitioner',
+      issuer: 'AWS',
+      year: '2025',
+      category: 'cloud',
+      certUrl: 'https://www.credly.com/badges/2d075048-9a61-43d9-8b97-58ff84aa0555'
+    },
+    {
+      name: 'AWS Certified Security Specialty',
+      issuer: 'AWS',
+      expected: 'Spring 2026',
+      category: 'cloud',
+      inProgress: true,
+      certUrl: 'https://aws.amazon.com/certification/certified-security-specialty/'
+    },
     {
       name: 'AWS Certified Developer',
       issuer: 'AWS',
@@ -95,6 +98,7 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-developer-associate/'
     },
+    // Privacy certs
     {
       name: 'OneTrust Fellow of Privacy Technology',
       issuer: 'OneTrust',
