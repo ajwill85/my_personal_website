@@ -15,7 +15,7 @@ const Experience = () => {
       publication: 'Global Information Assurance Certification',
       link: 'https://www.credly.com/badges/9edca151-4ece-4edf-aca0-dac53b796df1',
       date: '2023',
-      type: 'Leadership'
+      type: 'Recognition'
     },
     {
       title: 'TAISE Founding Contributor',
