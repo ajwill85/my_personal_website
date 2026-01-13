@@ -30,7 +30,7 @@ const Experience = () => {
     <section className="experience visible" id="experience">
       <div className="container">
         <h2 className="section-title">Thought Leadership & Recognition</h2>
-        
+
         <div className="publications-grid">
           {publications.map((pub, index) => (
             <article key={index} className="publication-card">

@@ -6,9 +6,9 @@ const Projects = ({ filter, onFilterClick }) => {
     {
       name: 'GRC AI Governance Serverless Platform',
       description: 'Enterprise-grade serverless GRC platform for AI governance and compliance automation. Built with AWS serverless architecture featuring Lambda functions, API Gateway, DynamoDB, and S3 for scalable, cost-effective operations. Implements automated compliance monitoring, risk assessment workflows, policy management, and audit trail capabilities. Designed for organizations managing AI/ML systems with regulatory requirements across ISO 27001, ISO 42001, and GDPR frameworks.',
-      technologies: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Python', 'Node.js', 'IAM', 'CloudWatch', 'EventBridge'],
+      technologies: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Python', 'Node.js', 'AWS IAM', 'CloudWatch', 'EventBridge'],
       category: 'GRC',
-      tags: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Python', 'Node.js', 'IAM', 'CloudWatch', 'EventBridge'],
+      tags: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Python', 'Node.js', 'AWS IAM', 'CloudWatch', 'EventBridge'],
       liveLink: null,
       githubLink: 'https://github.com/ajwill85/grc-ai-governance-serverless'
     },
@@ -58,6 +58,16 @@ const Projects = ({ filter, onFilterClick }) => {
       liveLink: null,
       githubLink: null,
       stealth: true
+    },
+    {
+      name: 'AWS: Banking ID Verification App',
+      description: 'AWS Cloud Institute Capstone Project. Building a serverless KYC Bank onboarding application, using AI/ML to verify driver\'s license (DL) with selfie photos. The app will confirm the customers information with a third-party DL validation service.',
+      technologies: ['AWS IAM', 'S3', 'AWS Lambda', 'AWS Rekognition', 'AWS Textract', 'SQS Queue', 'SNS Topic', 'API Gateway', 'DynamoDB'],
+      category: 'AI/ML',
+      tags: ['AWS IAM', 'S3', 'AWS Lambda', 'AWS Rekognition', 'AWS Textract', 'SQS Queue', 'SNS Topic', 'API Gateway', 'DynamoDB'],
+      liveLink: null,
+      githubLink: null,
+      stealth: true
     }
   ];
 
@@ -82,14 +92,14 @@ const Projects = ({ filter, onFilterClick }) => {
     <section className="projects visible" id="projects">
       <div className="container">
         <h2 className="section-title">Featured Projects</h2>
-        
+
         {/* Filter Indicator */}
         {filter.type && filter.value && (
           <div className="blog-filter-indicator">
             <span className="filter-text">
               Filtering by {filter.type}: <strong>{filter.value}</strong>
             </span>
-            <button 
+            <button
               className="btn btn-secondary clear-filter-btn"
               onClick={() => onFilterClick(null, null)}
             >
@@ -97,21 +107,21 @@ const Projects = ({ filter, onFilterClick }) => {
             </button>
           </div>
         )}
-        
+
         <div className="blog-grid">
           {filteredProjects.map((project) => (
-            <article 
-              key={project.name} 
+            <article
+              key={project.name}
               className="blog-card"
             >
               <div className="blog-content">
                 <div className="blog-meta">
                   {project.category && (
-                    <span 
+                    <span
                       className="blog-category clickable"
-                      onClick={(e) => { 
-                        e.stopPropagation(); 
-                        onFilterClick('category', project.category); 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onFilterClick('category', project.category);
                       }}
                     >
                       {project.category}
@@ -120,8 +130,8 @@ const Projects = ({ filter, onFilterClick }) => {
                   {project.stealth && (
                     <span className="stealth-badge">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
                       </svg>
                       Private
                     </span>
@@ -133,12 +143,12 @@ const Projects = ({ filter, onFilterClick }) => {
                 <p className="blog-excerpt">{project.description}</p>
                 <div className="blog-tags">
                   {project.tags.map((tag, tagIndex) => (
-                    <span 
-                      key={tagIndex} 
+                    <span
+                      key={tagIndex}
                       className="blog-tag clickable"
-                      onClick={(e) => { 
-                        e.stopPropagation(); 
-                        onFilterClick('tag', tag); 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onFilterClick('tag', tag);
                       }}
                     >
                       {tag}
@@ -148,9 +158,9 @@ const Projects = ({ filter, onFilterClick }) => {
                 {(project.liveLink || project.githubLink) && (
                   <div className="project-links">
                     {project.liveLink && (
-                      <a 
-                        href={project.liveLink} 
-                        target="_blank" 
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="project-link"
                       >
@@ -158,9 +168,9 @@ const Projects = ({ filter, onFilterClick }) => {
                       </a>
                     )}
                     {project.githubLink && (
-                      <a 
-                        href={project.githubLink} 
-                        target="_blank" 
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="project-link"
                       >
@@ -173,12 +183,12 @@ const Projects = ({ filter, onFilterClick }) => {
             </article>
           ))}
         </div>
-        
+
         {/* No Results Message */}
         {filteredProjects.length === 0 && projects.length > 0 && (
           <div className="blog-no-results">
             <p>No projects found for {filter.type}: <strong>{filter.value}</strong></p>
-            <button 
+            <button
               className="btn btn-secondary"
               onClick={() => onFilterClick(null, null)}
             >
