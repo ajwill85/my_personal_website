@@ -10,7 +10,7 @@ const ALL_POSTS = [
     category: 'GRC',
     excerpt: 'How I implemented a comprehensive AI governance framework with 67 automated controls across ISO 27001, 27701, and 42001 standards using policy-as-code.',
     tags: ['AI Governance', 'AWS', 'ISO 27001', 'ISO 42001', 'Policy-as-Code', 'OPA'],
-    status: 'published'
+    status: 'draft'
   },
   {
     slug: 'policy-as-code-guide',
@@ -28,7 +28,7 @@ const ALL_POSTS = [
     category: 'GRC',
     excerpt: 'Enterprise-grade serverless GRC platform for AI governance and compliance automation. Built with AWS serverless architecture featuring Lambda functions, API Gateway, DynamoDB, and S3 for scalable, cost-effective operations.',
     tags: ['AWS', 'Serverless', 'AI Governance', 'GRC', 'Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFormation', 'Policy-as-Code'],
-    status: 'published'
+    status: 'draft'
   },
   {
     slug: 'fire-calculator-retirement-app',
@@ -53,7 +53,7 @@ const ALL_POSTS = [
 // Filtered for public viewing (respects status and environment)
 export const getBlogPosts = async () => {
   const showDrafts = import.meta.env.VITE_SHOW_DRAFTS === 'true';
-  return ALL_POSTS.filter(post => 
+  return ALL_POSTS.filter(post =>
     showDrafts || post.status === 'published'
   );
 };
@@ -72,19 +72,19 @@ export const getBlogPostContent = async (slug) => {
   try {
     // Import all markdown files using Vite's import.meta.glob
     const modules = import.meta.glob('/src/content/blog/*.md', { query: '?raw', import: 'default' });
-    
+
     // Construct the file path
     const filePath = `/src/content/blog/${slug}.md`;
-    
+
     // Check if the file exists
     if (!(filePath in modules)) {
       return '<p>Post not found</p>';
     }
-    
+
     // Read and parse the markdown file
     const markdownContent = await modules[filePath]();
     const htmlContent = marked(markdownContent);
-    
+
     return htmlContent;
   } catch (error) {
     console.error(`Error loading blog post ${slug}:`, error);

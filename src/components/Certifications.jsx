@@ -4,8 +4,9 @@ const Certifications = () => {
 
   const categories = [
     { id: 'security', name: 'Security & Governance' },
-    { id: 'cloud', name: 'Cloud & AI' },
-    { id: 'privacy', name: 'Privacy & Compliance' }
+    { id: 'cloud', name: 'Cloud' },
+    { id: 'ai', name: 'AI Safety & Trust' },
+    { id: 'privacy', name: 'Privacy' }
   ];
 
   const certifications = [
@@ -51,7 +52,7 @@ const Certifications = () => {
       name: 'AWS Certified Security Specialty',
       issuer: 'AWS',
       expected: 'Spring 2026',
-      category: 'security',
+      category: 'cloud',
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-security-specialty/'
     },
@@ -59,7 +60,7 @@ const Certifications = () => {
       name: 'ISO 42001 Lead Auditor (AIMS)',
       issuer: 'Mastermind Assurance',
       year: '2025',
-      category: 'cloud',
+      category: 'ai',
       highlight: true,
       certUrl: 'https://www.credly.com/badges/e7430cff-b1a1-4980-af63-3ce72bde04c4'
     },
@@ -73,16 +74,16 @@ const Certifications = () => {
     {
       name: 'TAISE (Trusted AI Safety Expert)',
       issuer: 'Cloud Security Alliance',
-      expected: 'Spring 2026',
-      category: 'cloud',
-      inProgress: true,
+      year: '2026',
+      category: 'ai',
+      highlight: true,
       certUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
     },
     {
       name: 'AWS Certified AI Practitioner',
       issuer: 'AWS',
       expected: 'Summer 2026',
-      category: 'cloud',
+      category: 'ai',
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
     },
@@ -106,12 +107,12 @@ const Certifications = () => {
     {
       name: 'ISO 27701 Lead Auditor (PIMS)',
       issuer: 'TBD',
-      expected: 'Winter 2026',
+      expected: 'Fall 2026',
       category: 'privacy',
       inProgress: true,
       certUrl: 'https://www.iso.org/standard/85819.html'
     },
-      ];
+  ];
 
   const getCertsByCategory = (categoryId) => {
     return certifications.filter(cert => cert.category === categoryId);
@@ -121,7 +122,7 @@ const Certifications = () => {
     <section className="certifications visible" id="certifications">
       <div className="container">
         <h2 className="section-title">Certifications</h2>
-        
+
         <div className="cert-grid">
           {categories.map((category) => {
             const certs = getCertsByCategory(category.id);
@@ -131,7 +132,7 @@ const Certifications = () => {
                 <h3 className="cert-category-title">{category.name}</h3>
                 <div className="cert-list">
                   {certs.map((cert, index) => (
-                    <a 
+                    <a
                       key={index}
                       href={cert.certUrl}
                       target="_blank"
@@ -151,13 +152,13 @@ const Certifications = () => {
                         <span className="cert-link-icon">
                           {cert.inProgress ? (
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
-                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                              <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
                             </svg>
                           ) : (
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <circle cx="12" cy="8" r="7"/>
-                              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                              <circle cx="12" cy="8" r="7" />
+                              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
                             </svg>
                           )}
                         </span>
