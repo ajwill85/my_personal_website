@@ -64,7 +64,7 @@ const Certifications = () => {
       year: '2026',
       category: 'ai',
       highlight: true,
-      certUrl: 'https://cloudsecurityalliance.org/artifacts/taise-course-outline'
+      certUrl: 'https://www.credly.com/badges/345c2819-8260-4024-86b0-d3fd47f1ee4b/'
     },
     {
       name: 'AWS Certified AI Practitioner',
