@@ -83,6 +83,13 @@ const Certifications = () => {
       certUrl: 'https://www.credly.com/badges/2d075048-9a61-43d9-8b97-58ff84aa0555'
     },
     {
+      name: 'Google Cybersecurity Professional',
+      issuer: 'Google',
+      year: '2023',
+      category: 'cloud',
+      certUrl: 'https://www.credly.com/badges/de8c4b08-d41d-4210-8e43-423fdcb7dd0e'
+    },
+    {
       name: 'AWS Certified Security Specialty',
       issuer: 'AWS',
       expected: 'Spring 2026',
