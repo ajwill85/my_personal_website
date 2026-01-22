@@ -33,7 +33,7 @@ const Navigation = () => {
       <div className="nav-container">
         <div className="nav-brand">
           <a href="#home" onClick={handleLinkClick}>
-            <img src="/favicon.jpg" alt="Akeem Williams" className="nav-brand-photo" />
+            <img src="/aj-avatar.png" alt="Akeem Williams" className="nav-brand-photo" />
             <span>AW</span>
           </a>
         </div>
@@ -50,7 +50,7 @@ const Navigation = () => {
         </ul>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="mobile-menu-button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"

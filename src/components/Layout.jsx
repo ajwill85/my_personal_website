@@ -154,10 +154,10 @@ const SidebarContent = ({ isMobile, onCloseMobileMenu, currentRoute, onNavigate 
       <div className="sidebar-brand">
         <a href="#home" onClick={() => handleLinkClick('home')} className="brand-link">
           <div className="brand-icon">
-            <img src="/favicon.jpg" alt="Akeem Williams" className="brand-photo" />
+            <img src="/aj-avatar.png" alt="Akeem Williams" className="brand-photo" />
           </div>
           <div className="brand-text">
-            <div className="brand-name">AW</div>
+            <div className="brand-name">AJW</div>
             <div className="brand-subtitle">GRC Engineer</div>
           </div>
         </a>

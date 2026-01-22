@@ -4,6 +4,24 @@ import { marked } from 'marked';
 // Single data source for all blog posts
 const ALL_POSTS = [
   {
+    slug: 'cybersecurity-news-aggregator-aws-lambda-dynamodb',
+    title: 'Building a Real-Time Cybersecurity News Aggregator with AWS Lambda and DynamoDB',
+    date: '2025-11-18',
+    category: 'Content Delivery',
+    excerpt: 'How I built a cybersecurity news aggregator that pulls from multiple sources using AWS serverless architecture.',
+    tags: ['AWS', 'Lambda', 'DynamoDB', 'React', 'Vite', 'API Gateway', 'S3', 'CloudFront', 'Cybersecurity', 'News Aggregator'],
+    status: 'published'
+  },
+  {
+    slug: 'serverless-portfolio-aws-cloudfront-lambda',
+    title: 'Building a Serverless Portfolio Website with AWS: CloudFront, Lambda, and DynamoDB',
+    date: '2025-10-18',
+    category: 'Web Development',
+    excerpt: 'How I built my portfolio website using AWS serverless architecture.',
+    tags: ['AWS', 'Serverless', 'React', 'Vite', 'Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'SES', 'CloudFormation', 'IaC'],
+    status: 'published'
+  },
+  {
     slug: 'ai-governance-framework',
     title: 'Building an AWS AI Governance Framework with 67 Automated Controls',
     date: '2026-01-02',
@@ -93,7 +111,14 @@ export const getBlogPostContent = async (slug) => {
 };
 
 export const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString('en-US', {
+  // Parse date string manually to avoid timezone issues
+  // Input format: "2025-10-18" (YYYY-MM-DD)
+  const [year, month, day] = dateString.split('-').map(Number);
+
+  // Create date in local timezone (not UTC)
+  const date = new Date(year, month - 1, day);
+
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
