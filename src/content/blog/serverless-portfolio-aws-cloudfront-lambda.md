@@ -6,8 +6,6 @@ excerpt: "How I built my portfolio website using AWS serverless architecture."
 tags: ["AWS", "Serverless", "React", "Vite", "Lambda", "API Gateway", "DynamoDB", "S3", "CloudFront", "ACM", "SES", "CloudFormation", "IaC"]
 ---
 
-# Building a Serverless Portfolio Website with AWS: CloudFront, Lambda, and DynamoDB
-
 Creating a portfolio website can be as simple as purchasing a domain and connecting it to a website builder, or paying a third party to do it all for you. However, deploying it with AWS infrastructure gives you a lot more control and is a great way to learn about AWS services, and work on your coding skills. In this post, I'll walk you through how I built **ajwill.ai** using a fully serverless AWS architecture that's scalable, cost-effective, and deployed with Infrastructure as Code (IaC).
 
 ## Why AWS Serverless?

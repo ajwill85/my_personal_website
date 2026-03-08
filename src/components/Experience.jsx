@@ -4,11 +4,18 @@ const Experience = () => {
 
   const publications = [
     {
-      title: 'Is Security Awareness a Dirty Word?',
-      publication: 'Human Risk Management',
-      link: 'https://humanriskintel.beehiiv.com/p/human-risk-management-security-awareness-is-a-dirty-word',
-      date: '2024-01-15',
-      type: 'Article'
+      title: 'AWS Community Builder - Security',
+      publication: 'Amazon Web Services',
+      link: 'https://builder.aws.com/community/@ajwill',
+      date: '2026',
+      type: 'Community'
+    },
+    {
+      title: 'TAISE Founding Contributor',
+      publication: 'Cloud Security Alliance',
+      link: 'https://cloudsecurityalliance.org/education/taise-donors',
+      date: '2025',
+      type: 'Contribution'
     },
     {
       title: 'GIAC Advisory Board Member',
@@ -18,11 +25,11 @@ const Experience = () => {
       type: 'Recognition'
     },
     {
-      title: 'TAISE Founding Contributor',
-      publication: 'Cloud Security Alliance',
-      link: 'https://cloudsecurityalliance.org/education/taise-donors',
-      date: '2025',
-      type: 'Contribution'
+      title: 'Is Security Awareness a Dirty Word?',
+      publication: 'Human Risk Management',
+      link: 'https://humanriskintel.beehiiv.com/p/human-risk-management-security-awareness-is-a-dirty-word',
+      date: '2024-01-15',
+      type: 'Article'
     }
   ];
 

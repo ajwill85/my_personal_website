@@ -99,9 +99,14 @@ export const getBlogPostContent = async (slug) => {
       return '<p>Post not found</p>';
     }
 
-    // Read and parse the markdown file
+    // Read the markdown file
     const markdownContent = await modules[filePath]();
-    const htmlContent = marked(markdownContent);
+
+    // Strip YAML frontmatter (everything between --- and ---)
+    const contentWithoutFrontmatter = markdownContent.replace(/^---[\s\S]*?---\s*/m, '');
+
+    // Parse markdown to HTML
+    const htmlContent = marked(contentWithoutFrontmatter);
 
     return htmlContent;
   } catch (error) {

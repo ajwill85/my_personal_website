@@ -6,8 +6,6 @@ excerpt: "How I built a cybersecurity news aggregator that pulls from multiple s
 tags: ["AWS", "Lambda", "DynamoDB", "React", "Vite", "API Gateway", "S3", "CloudFront", "Cybersecurity", "News Aggregator"]
 ---
 
-# Building a Real-Time Cybersecurity News Aggregator with AWS Lambda and DynamoDB
-
 Staying current with cybersecurity news is challenging. Between RSS feeds, Reddit, Hacker News, and various security blogs, it's easy to miss important updates. That's why I built **Human Risk Intelligence** (humanriskintel.com) - a centralized cybersecurity news aggregator that automatically pulls from trusted sources and categorizes content across 15+ security topics.
 
 In this post, I'll share how I used AWS serverless architecture to build a real-time news aggregator that's fast, scalable, and costs almost nothing to run.
