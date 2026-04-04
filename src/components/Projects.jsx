@@ -28,7 +28,7 @@ const Projects = ({ filter, onFilterClick }) => {
       category: 'Content Delivery',
       tags: ['React', 'Vite', 'Lucide React', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'S3', 'CloudFront', 'ACM', 'Cloudflare DNS'],
       liveLink: 'https://www.humanriskintel.com',
-      githubLink: 'https://github.com/ajwill85/human-risk-intelligence'
+      githubLink: 'https://github.com/ajwill85/hri_3.0'
     },
     {
       name: 'Portfolio Website with Serverless Backend',

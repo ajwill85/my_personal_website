@@ -4,6 +4,15 @@ import { marked } from 'marked';
 // Single data source for all blog posts
 const ALL_POSTS = [
   {
+    slug: 'jevons-paradox-ai',
+    title: 'Jevons Paradox in the Age of AI',
+    date: '2026-04-10',
+    category: 'AI/ML',
+    excerpt: 'Exploring the implications of Jevons Paradox in the age of AI and its impact on energy consumption and sustainability.',
+    tags: ['AI', 'Jevons Paradox', 'Energy Consumption', 'Sustainability', 'AI Alignmnet'],
+    status: 'draft'
+  },
+  {
     slug: 'cybersecurity-news-aggregator-aws-lambda-dynamodb',
     title: 'Building a Real-Time Cybersecurity News Aggregator with AWS Lambda and DynamoDB',
     date: '2025-11-18',

@@ -28,13 +28,6 @@ const Certifications = () => {
       certUrl: 'https://www.credly.com/badges/d5f65c4b-4a1a-4c4c-96cf-5971756af729'
     },
     {
-      name: 'GIAC Security Leadership (GSLC)',
-      issuer: 'GIAC',
-      year: '2023',
-      category: 'security',
-      certUrl: 'https://www.credly.com/badges/fc7597e4-e4c9-4478-a2e6-99c44369f9b1'
-    },
-    {
       name: 'Security Awareness Professional (SSAP)',
       issuer: 'SANS',
       year: '2023',
@@ -42,9 +35,23 @@ const Certifications = () => {
       certUrl: 'https://www.credly.com/badges/03638838-693a-4862-a933-60dc0c1f430c'
     },
     {
+      name: 'GIAC Security Leadership (GSLC)',
+      issuer: 'GIAC',
+      year: '2023',
+      category: 'security',
+      certUrl: 'https://www.credly.com/badges/fc7597e4-e4c9-4478-a2e6-99c44369f9b1'
+    },
+    {
+      name: 'Verified Vanta Admin',
+      issuer: 'Vanta',
+      year: '2026',
+      category: 'security',
+      certUrl: 'https://learning.vanta.com/certificate/-SP5CWG_5w'
+    },
+    {
       name: 'Certified Information Systems Auditor (CISA)',
       issuer: 'ISACA',
-      expected: 'Summer 2026',
+      expected: '2027',
       category: 'security',
       inProgress: true,
       certUrl: 'https://www.isaca.org/credentialing/cisa'
@@ -74,6 +81,30 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
     },
+    {
+      name: 'AIGP (AI Governance Professional)',
+      issuer: 'iapp',
+      expected: 'Summer 2026',
+      category: 'ai',
+      inProgress: true,
+      certUrl: 'https://www.iapp.org/certify/aigp'
+    },
+    {
+      name: 'Claude Certified Architect (CCA-F)',
+      issuer: 'Anthropic',
+      expected: '2026',
+      category: 'ai',
+      inProgress: true,
+      certUrl: 'https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request'
+    },
+    {
+      name: 'Google Generative AI Leader (GAIL)',
+      issuer: 'Google',
+      expected: '2027',
+      category: 'ai',
+      inProgress: true,
+      certUrl: 'https://developers.google.com/program/gear/getcertified'
+    },
     // Cloud certs
     {
       name: 'AWS Certified Cloud Practitioner',
@@ -92,7 +123,7 @@ const Certifications = () => {
     {
       name: 'AWS Certified Security Specialty',
       issuer: 'AWS',
-      expected: 'Spring 2026',
+      expected: '2027',
       category: 'cloud',
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-security-specialty/'
@@ -100,7 +131,7 @@ const Certifications = () => {
     {
       name: 'AWS Certified Developer',
       issuer: 'AWS',
-      expected: 'Winter 2026',
+      expected: 'Summer 2026',
       category: 'cloud',
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-developer-associate/'
@@ -118,7 +149,7 @@ const Certifications = () => {
     {
       name: 'ISO 27701 Lead Auditor (PIMS)',
       issuer: 'TBD',
-      expected: 'Fall 2026',
+      expected: '2027',
       category: 'privacy',
       inProgress: true,
       certUrl: 'https://www.iso.org/standard/85819.html'
