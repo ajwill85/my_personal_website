@@ -4,6 +4,15 @@ import { marked } from 'marked';
 // Single data source for all blog posts
 const ALL_POSTS = [
   {
+    slug: 'three-legged-trust-stool',
+    title: 'The Three-Legged Trust Stool: Why Delve, Auditors, and Customers are All to Blame',
+    date: '2026-04-05',
+    category: 'GRC',
+    excerpt: 'The Delve SOC2 scandal is a wake-up call for the entire GRC industry and startup community. It highlights the importance of trust, accountability, and transparency in the certification process. It also serves as a reminder that certifications are only as good as the most ethical party involved.',
+    tags: ['GRC', 'SOC2', 'Delve', 'Auditors', 'Compliance', 'Trust', 'Security', 'ISO 27001', 'Risk Management', 'Third Party Risk Management', 'Security Audit'],
+    status: 'published'
+  },
+  {
     slug: 'jevons-paradox-ai',
     title: 'Jevons Paradox in the Age of AI',
     date: '2026-04-10',
