@@ -20,8 +20,7 @@ const Navigation = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Certifications', href: '#certifications' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Blog', href: '#blog' }
   ];
 
   const handleLinkClick = () => {

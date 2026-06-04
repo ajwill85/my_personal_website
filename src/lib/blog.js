@@ -4,9 +4,18 @@ import { marked } from 'marked';
 // Single data source for all blog posts
 const ALL_POSTS = [
   {
+    slug: 'terraform-destroy-costs',
+    title: 'How Amazon Q and Terraform Destroy saved me $100 a month!',
+    date: '2026-04-14',
+    category: 'DevOps',
+    excerpt: 'I recently used Terraform to manage my AWS infrastructure for a pet project I was working on, but I never realized how much I was wasting until I started using Amazon Q to analyze my costs. I was able to identify several areas where I could optimize my spending, and I\'m excited to share my findings with you.',
+    tags: ['AWS', 'DevOps', 'Terraform', 'Amazon Q', 'Cost Optimization', 'Infrastructure as Code', 'CloudFormation', 'Security', 'Compliance', 'Risk Management', 'Third Party Risk Management', 'Security Audit'],
+    status: 'draft'
+  },
+  {
     slug: 'three-legged-trust-stool',
     title: 'The Three-Legged Trust Stool: Why Delve, Auditors, and Customers are All to Blame',
-    date: '2026-04-05',
+    date: '2026-04-06',
     category: 'GRC',
     excerpt: 'The Delve SOC2 scandal is a wake-up call for the entire GRC industry and startup community. It highlights the importance of trust, accountability, and transparency in the certification process. It also serves as a reminder that certifications are only as good as the most ethical party involved.',
     tags: ['GRC', 'SOC2', 'Delve', 'Auditors', 'Compliance', 'Trust', 'Security', 'ISO 27001', 'Risk Management', 'Third Party Risk Management', 'Security Audit'],

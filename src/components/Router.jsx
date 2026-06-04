@@ -6,7 +6,6 @@ import Blog from './Blog';
 import BlogPost from './Blog/BlogPost';
 import Certifications from './Certifications';
 import Experience from './Experience';
-import Contact from './Contact';
 import './Router.css';
 
 const Router = () => {
@@ -115,8 +114,6 @@ const Router = () => {
         return <Certifications />;
       case 'experience':
         return <Experience />;
-      case 'contact':
-        return <Contact />;
       default:
         return <Hero />;
     }

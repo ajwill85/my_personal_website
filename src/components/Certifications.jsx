@@ -82,9 +82,17 @@ const Certifications = () => {
       certUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
     },
     {
+      name: 'Google AI Professional Certificate',
+      issuer: 'Google',
+      expected: 'Summer 2026',
+      category: 'ai',
+      inProgress: true,
+      certUrl: 'https://grow.google/ai-professional/'
+    },
+    {
       name: 'AIGP (AI Governance Professional)',
       issuer: 'iapp',
-      expected: 'Summer 2026',
+      expected: '2026',
       category: 'ai',
       inProgress: true,
       certUrl: 'https://www.iapp.org/certify/aigp'
@@ -92,7 +100,7 @@ const Certifications = () => {
     {
       name: 'Claude Certified Architect (CCA-F)',
       issuer: 'Anthropic',
-      expected: '2026',
+      expected: '2027',
       category: 'ai',
       inProgress: true,
       certUrl: 'https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request'
@@ -138,6 +146,14 @@ const Certifications = () => {
     },
     // Privacy certs
     {
+      name: 'ISO 27701 Lead Auditor (PIMS)',
+      issuer: 'Mastermind Assurance',
+      year: '2026',
+      category: 'privacy',
+      highlight: true,
+      certUrl: 'https://www.credly.com/badges/283c675e-3337-41c6-bc48-d01f4b90429a'
+    },
+    {
       name: 'OneTrust Fellow of Privacy Technology',
       issuer: 'OneTrust',
       year: '2024',
@@ -145,15 +161,7 @@ const Certifications = () => {
       highlight: true,
       details: '10 specializations including Privacy, GRC, TPRM, PIAs, Data Mapping',
       certUrl: 'https://www.credly.com/badges/de15b56a-e8ba-4e88-9de3-25cde63f3122'
-    },
-    {
-      name: 'ISO 27701 Lead Auditor (PIMS)',
-      issuer: 'TBD',
-      expected: '2027',
-      category: 'privacy',
-      inProgress: true,
-      certUrl: 'https://www.iso.org/standard/85819.html'
-    },
+    }
   ];
 
   const getCertsByCategory = (categoryId) => {

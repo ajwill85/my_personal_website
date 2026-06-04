@@ -64,7 +64,7 @@ const Hero = () => {
           <div className="hero-cta">
             <button onClick={() => handleNavigation('projects')} className="btn btn-primary">View Projects</button>
             <a href="/resume/Akeem_Williams_GRC_Engineer_Resume.pdf" className="btn btn-secondary" download>Download Resume</a>
-            <button onClick={() => handleNavigation('contact')} className="btn btn-secondary">Contact Me</button>
+            <a href="mailto:ajwilliams85@gmail.com" className="btn btn-secondary">Contact Me</a>
             <a href="https://github.com/ajwill85" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">GitHub</a>
           </div>
 
