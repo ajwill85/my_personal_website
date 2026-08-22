@@ -11,14 +11,25 @@ const sesClient = new SESClient({
   region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1'
 });
 
-exports.handler = async (event) => {
-  // CORS headers
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
+const ALLOWED_ORIGINS = [
+  'https://ajwill.ai',
+  'https://www.ajwill.ai',
+];
+
+function corsHeaders(event) {
+  const origin = event.headers?.origin || event.headers?.Origin || '';
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    Vary: 'Origin',
   };
+}
+
+exports.handler = async (event) => {
+  const headers = corsHeaders(event);
 
   // Handle preflight OPTIONS request
   if (event.httpMethod === 'OPTIONS') {

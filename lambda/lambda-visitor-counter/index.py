@@ -9,12 +9,32 @@ dynamodb = boto3.resource('dynamodb')
 table_name = os.environ.get('TABLE_NAME', 'portfolio-visitors')
 table = dynamodb.Table(table_name)
 
+ALLOWED_ORIGINS = (
+    'https://ajwill.ai',
+    'https://www.ajwill.ai',
+)
+
+
+def cors_headers(event):
+    headers = event.get('headers') or {}
+    origin = headers.get('origin') or headers.get('Origin') or ''
+    allow_origin = origin if origin in ALLOWED_ORIGINS else ALLOWED_ORIGINS[0]
+    return {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': allow_origin,
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Vary': 'Origin',
+    }
+
+
 def lambda_handler(event, context):
     """
     Visitor counter with unique IP tracking and 24-hour deduplication.
     Only counts unique visitors once per day based on IP address.
     """
-    
+    headers = cors_headers(event)
+
     # Get visitor IP address
     source_ip = event.get('requestContext', {}).get('identity', {}).get('sourceIp', 'unknown')
     user_agent = event.get('requestContext', {}).get('identity', {}).get('userAgent', '')
@@ -89,15 +109,9 @@ def lambda_handler(event, context):
             
             current_count += 1
         
-        # Return response with CORS headers
         return {
             'statusCode': 200,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Methods': 'GET, OPTIONS'
-            },
+            'headers': headers,
             'body': json.dumps({
                 'count': current_count,
                 'message': 'Visitor count retrieved successfully',
@@ -110,10 +124,7 @@ def lambda_handler(event, context):
         print(f"Error: {str(e)}")
         return {
             'statusCode': 500,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
+            'headers': headers,
             'body': json.dumps({
                 'error': 'Failed to update visitor count',
                 'message': str(e)
