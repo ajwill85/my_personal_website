@@ -16,9 +16,10 @@ const Skills = () => {
     {
       title: 'Compliance & Governance',
       skills: [
-        'ISO Standards (27001, 42001, 27701)',
+        'Management Systems Auditing (ISO 27001, 27701, 42001)',
         'NIST Frameworks (CSF, RMF, AI RMF)',
         'Privacy Regulations (GDPR, CCPA)',
+        'GRC & Compliance Automation',
         'SOC 2'
       ]
     },
@@ -27,6 +28,7 @@ const Skills = () => {
       skills: [
         'AI/ML Governance & Safety',
         'AI Safety & Trustworthiness',
+        'Trusted AI Frameworks & Safety Controls',
         'AI Risk Assessment Methodologies',
         'AI Ethics & Responsible AI'
       ]
@@ -37,8 +39,8 @@ const Skills = () => {
         'Privacy Impact Assessments (PIAs)',
         'Data Subject Rights & Consent Management',
         'Privacy by Design & Data Mapping',
-        'PII Protection & Data Masking',
-        'Privacy Program Management'
+        'Privacy Program Management & Automation',
+        'PII Protection & Data Masking'
       ]
     },
     {

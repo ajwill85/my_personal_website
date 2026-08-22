@@ -15,9 +15,7 @@ const Hero = () => {
         <div className="hero-text">
           <h1 className="hero-name">Akeem Williams</h1>
           <h2 className="hero-title">
-            Sr. AI Information Security Analyst
-            <br />
-            <span className="hero-subtitle">Security & AI Governance</span>
+            Security & AI Governance
           </h2>
           <p className="hero-location">CA/FL | Remote</p>
 
@@ -43,7 +41,7 @@ const Hero = () => {
               </span>
               <div>
                 <h4>ISO Lead Auditor</h4>
-                <p>27001 & 42001 Certified</p>
+                <p>ISO 27001, 27701 & 42001</p>
               </div>
             </div>
             <div className="highlight-item clickable" onClick={() => handleNavigation('experience')}>
@@ -63,8 +61,8 @@ const Hero = () => {
 
           <div className="hero-cta">
             <button onClick={() => handleNavigation('projects')} className="btn btn-primary">View Projects</button>
-            <a href="/resume/Akeem_Williams_GRC_Engineer_Resume.pdf" className="btn btn-secondary" download>Download Resume</a>
-            <a href="mailto:ajwilliams85@gmail.com" className="btn btn-secondary">Contact Me</a>
+            <a href="mailto:aj@ajwill.ai?subject=Resume%20Request" className="btn btn-secondary">Request Resume</a>
+            <a href="mailto:aj@ajwill.ai" className="btn btn-secondary">Contact Me</a>
             <a href="https://github.com/ajwill85" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">GitHub</a>
           </div>
 
@@ -72,8 +70,8 @@ const Hero = () => {
           <div className="about-content">
             <div className="about-text">
               <p className="intro">
-                I'm a <strong>Sr. AI Information Security Analyst</strong> focused on AI Governance, specializing in Cloud Security,
-                privacy controls, and compliance automation. I bridge the gap between compliance
+                I'm a <strong>GRC professional</strong> specializing in AI governance,
+                compliance automation, and Third-Party Risk Management (TPRM) in cloud-native SaaS environments. I bridge the gap between compliance
                 requirements and technical implementation, turning regulatory frameworks into{' '}
                 <strong>automated, enforceable controls</strong>.
               </p>
@@ -83,22 +81,19 @@ const Hero = () => {
                   My approach combines technical expertise with governance frameworks. I've built
                   an <strong>AWS AI Governance Framework</strong> implementing 67+ automated controls
                   using policy-as-code (OPA/Rego), developed serverless applications on AWS, and
-                  certified to conduct ISO 27001/42001 audits for organizations navigating complex compliance landscapes.
+                  certified as a Fellow of Management Systems Auditing (ISO 27001, 27701, 42001) for organizations navigating complex compliance landscapes.
                 </p>
 
                 <p>
-                  I'm a <strong>founding contributor to CSA's TAISE (Trusted AI Safety Expert)
-                    certification</strong>, supporting the development of industry standards for secure,
-                  responsible, and ethical use of AI.
-                  As an <strong>OneTrust Fellow of Privacy Technology</strong> and <strong>CISSP</strong>,
-                  I bring a unique blend of privacy engineering, cloud security, and risk management.
-                  I'm passionate about making security and compliance practical, measurable, and
-                  integrated into the development lifecycle—not just checkboxes.
+                  As a <strong>CISSP</strong> and founding contributor to the <strong>CSA TAISE (Trusted AI Safety Expert)</strong> program,
+                  I support the development of industry standards for secure, responsible, and ethical AI. I bring a unique blend of
+                  cloud security, AI safety governance, and technical risk management, and I'm passionate about making compliance
+                  practical, measurable, and integrated into the development lifecycle—not just checkboxes.
                 </p>
 
                 <p className="cta">
-                  Currently available for GRC engineering roles and audit engagements focused on cloud security compliance,
-                  AI governance, privacy automation, and compliance framework implementation.
+                  Currently leading security compliance and AI governance at a <strong>venture-backed B2B AI SaaS company</strong>,
+                  and available for select GRC consulting and ISO audit engagements.
                 </p>
               </div>
 

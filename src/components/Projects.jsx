@@ -61,7 +61,7 @@ const Projects = ({ filter, onFilterClick }) => {
     },
     {
       name: 'AWS: Banking ID Verification App',
-      description: 'AWS Cloud Institute Capstone Project. Building a serverless KYC Bank onboarding application, using AI/ML to verify driver\'s license (DL) with selfie photos. The app will confirm the customers information with a third-party DL validation service.',
+      description: 'Proof of concept for building a serverless KYC Bank onboarding application, using AI/ML to verify driver\'s license (DL) with selfie photos. The app will confirm the customers information with a third-party DL validation service.',
       technologies: ['AWS IAM', 'S3', 'AWS Lambda', 'AWS Rekognition', 'AWS Textract', 'SQS Queue', 'SNS Topic', 'API Gateway', 'DynamoDB'],
       category: 'AI/ML',
       tags: ['AWS IAM', 'S3', 'AWS Lambda', 'AWS Rekognition', 'AWS Textract', 'SQS Queue', 'SNS Topic', 'API Gateway', 'DynamoDB'],
