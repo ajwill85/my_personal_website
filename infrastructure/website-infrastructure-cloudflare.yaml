@@ -70,6 +70,73 @@ Resources:
         SigningBehavior: always
         SigningProtocol: sigv4
 
+  # Agent discovery Link headers (RFC 8288 / RFC 9727)
+  AgentDiscoveryHeadersPolicy:
+    Type: 'AWS::CloudFront::ResponseHeadersPolicy'
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub '${ProjectName}-agent-discovery-headers'
+        Comment: 'Link headers for API catalog and agent discovery'
+        CorsConfig:
+          AccessControlAllowCredentials: false
+          AccessControlAllowOrigins:
+            Items:
+              - '*'
+          AccessControlAllowHeaders:
+            Items:
+              - '*'
+          AccessControlAllowMethods:
+            Items:
+              - GET
+              - HEAD
+              - OPTIONS
+          AccessControlExposeHeaders:
+            Items:
+              - Link
+          AccessControlMaxAgeSec: 86400
+          OriginOverride: false
+        CustomHeadersConfig:
+          Items:
+            - Header: Link
+              Value: '</.well-known/api-catalog>; rel="api-catalog", </.well-known/ai-catalog.json>; rel="describedby"; type="application/json", </index.md>; rel="alternate"; type="text/markdown", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"'
+              Override: true
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 31536000
+            IncludeSubdomains: true
+            Override: true
+          ContentTypeOptions:
+            Override: true
+          FrameOptions:
+            FrameOption: DENY
+            Override: true
+          ReferrerPolicy:
+            ReferrerPolicy: strict-origin-when-cross-origin
+            Override: true
+
+  # Accept: text/markdown → serve /index.md for homepage
+  MarkdownNegotiationFunction:
+    Type: 'AWS::CloudFront::Function'
+    Properties:
+      Name: !Sub '${ProjectName}-markdown-negotiation'
+      AutoPublish: true
+      FunctionConfig:
+        Comment: 'Rewrite / to /index.md when Accept includes text/markdown'
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          var headers = request.headers;
+          var accept = (headers.accept && headers.accept.value) ? headers.accept.value.toLowerCase() : '';
+          var uri = request.uri;
+          if (accept.indexOf('text/markdown') !== -1) {
+            if (uri === '/' || uri === '/index.html') {
+              request.uri = '/index.md';
+            }
+          }
+          return request;
+        }
+
   # CloudFront Distribution
   CloudFrontDistribution:
     Type: 'AWS::CloudFront::Distribution'
@@ -106,7 +173,12 @@ Resources:
           Compress: true
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # CachingOptimized
           OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf  # CORS-S3Origin
+          ResponseHeadersPolicyId: !Ref AgentDiscoveryHeadersPolicy
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt MarkdownNegotiationFunction.FunctionARN
         CustomErrorResponses:
+          # Do not SPA-fallback discovery documents (robots, sitemap, well-known)
           - ErrorCode: 403
             ResponseCode: 200
             ResponsePagePath: /index.html

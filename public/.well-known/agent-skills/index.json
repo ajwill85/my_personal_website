@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "portfolio-overview",
+      "type": "skill-md",
+      "description": "Summarize Akeem Williams' GRC portfolio, projects, and how to contact him via ajwill.ai",
+      "url": "https://ajwill.ai/.well-known/agent-skills/portfolio-overview/SKILL.md",
+      "digest": "sha256:0ebe57ce9288d63ba7dfa11b39c2c90995d91917775221eef84799998fbc1ade"
+    }
+  ]
+}

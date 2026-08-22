@@ -1,0 +1,40 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ajwill.ai Visitor Counter API",
+    "version": "1.0.0",
+    "description": "Public visitor counter with IP-hash deduplication for https://ajwill.ai"
+  },
+  "servers": [
+    {
+      "url": "https://ajwill.ai",
+      "description": "Configure the live API Gateway URL via VITE_VISITOR_COUNTER_API at build time"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getVisitorCount",
+        "summary": "Increment and return visitor count",
+        "responses": {
+          "200": {
+            "description": "Current count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "message": { "type": "string" },
+                    "visit_type": { "type": "string" },
+                    "is_bot": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

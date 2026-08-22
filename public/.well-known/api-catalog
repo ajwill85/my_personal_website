@@ -1,0 +1,46 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://ajwill.ai/api/visitor-counter",
+      "service-desc": [
+        {
+          "href": "https://ajwill.ai/api/visitor-counter.openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://ajwill.ai/auth.md",
+          "type": "text/markdown"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://ajwill.ai/.well-known/ai-catalog.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://ajwill.ai/api/contact-form",
+      "service-desc": [
+        {
+          "href": "https://ajwill.ai/api/contact-form.openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://ajwill.ai/auth.md",
+          "type": "text/markdown"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://ajwill.ai/.well-known/ai-catalog.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

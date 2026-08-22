@@ -1,0 +1,19 @@
+# llms.txt for https://ajwill.ai
+
+This file helps language models understand the site.
+
+## About
+
+Akeem Williams — GRC Engineer and ISO Lead Auditor. Focus areas: AI governance, ISO 27001/27701/42001, policy-as-code, and serverless AWS security architecture.
+
+## Preferred sources
+
+- https://ajwill.ai/index.md
+- https://ajwill.ai/#projects
+- https://ajwill.ai/#blog
+- https://ajwill.ai/#certifications
+- https://ajwill.ai/.well-known/ai-catalog.json
+
+## Contact
+
+aj@ajwill.ai

@@ -1,0 +1,63 @@
+# robots.txt for https://ajwill.ai
+# Per RFC 9309 + Content Signals + AI crawler policy
+
+User-agent: *
+Allow: /
+Disallow: /lambda/
+Disallow: /infrastructure/
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: OAI-SearchBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: ChatGPT-User
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# Anthropic
+User-agent: Claude-Web
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: anthropic-ai
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: ClaudeBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# Google
+User-agent: Google-Extended
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# Other AI crawlers
+User-agent: Amazonbot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: Bytespider
+Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
+
+User-agent: CCBot
+Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
+
+User-agent: Applebot-Extended
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+Sitemap: https://ajwill.ai/sitemap.xml
+Agentmap: https://ajwill.ai/.well-known/ai-catalog.json

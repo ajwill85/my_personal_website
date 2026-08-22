@@ -1,0 +1,41 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Akeem Williams — ajwill.ai",
+    "identifier": "did:web:ajwill.ai"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:ajwill.ai:catalog:api",
+      "displayName": "ajwill.ai API Catalog",
+      "type": "application/linkset+json",
+      "url": "https://ajwill.ai/.well-known/api-catalog",
+      "representativeQueries": [
+        "what APIs does ajwill.ai expose",
+        "openapi for the portfolio contact form",
+        "visitor counter API documentation"
+      ]
+    },
+    {
+      "identifier": "urn:air:ajwill.ai:skills:portfolio-overview",
+      "displayName": "Portfolio Overview Agent Skill",
+      "type": "text/markdown",
+      "url": "https://ajwill.ai/.well-known/agent-skills/portfolio-overview/SKILL.md",
+      "representativeQueries": [
+        "who is Akeem Williams",
+        "summarize the GRC portfolio on ajwill.ai",
+        "how do I contact Akeem about GRC or AI governance"
+      ]
+    },
+    {
+      "identifier": "urn:air:ajwill.ai:docs:site-markdown",
+      "displayName": "Site markdown for agents",
+      "type": "text/markdown",
+      "url": "https://ajwill.ai/index.md",
+      "representativeQueries": [
+        "markdown version of ajwill.ai homepage",
+        "llms.txt for ajwill.ai"
+      ]
+    }
+  ]
+}

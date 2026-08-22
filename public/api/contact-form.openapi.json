@@ -1,0 +1,65 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ajwill.ai Contact Form API",
+    "version": "1.0.0",
+    "description": "Public contact form handler that emails submissions via Amazon SES"
+  },
+  "servers": [
+    {
+      "url": "https://ajwill.ai",
+      "description": "Configure the live API Gateway URL via VITE_CONTACT_FORM_API at build time"
+    }
+  ],
+  "paths": {
+    "/contact": {
+      "post": {
+        "operationId": "submitContactForm",
+        "summary": "Submit a contact form message",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["fullName", "email", "message"],
+                "properties": {
+                  "fullName": { "type": "string" },
+                  "email": { "type": "string", "format": "email" },
+                  "company": { "type": "string" },
+                  "budget": { "type": "string" },
+                  "message": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email queued/sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing required fields" },
+          "500": { "description": "Send failure" }
+        }
+      },
+      "options": {
+        "operationId": "contactCorsPreflight",
+        "summary": "CORS preflight",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    }
+  }
+}

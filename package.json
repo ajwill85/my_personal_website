@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-agent-assets.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/generate-agent-assets.mjs",
     "build": "vite build",
+    "generate:agent-assets": "node scripts/generate-agent-assets.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -107,6 +107,43 @@ else
     error "Failed to upload files to S3"
 fi
 
+# Step 1b: Fix Content-Types for agent-discovery assets (extensionless / markdown)
+info "Setting Content-Types for agent discovery assets..."
+aws s3 cp "dist/robots.txt" "s3://${BUCKET_NAME}/robots.txt" \
+    --content-type "text/plain; charset=utf-8" \
+    --cache-control "public,max-age=3600" \
+    --profile "$AWS_PROFILE" >/dev/null
+aws s3 cp "dist/sitemap.xml" "s3://${BUCKET_NAME}/sitemap.xml" \
+    --content-type "application/xml; charset=utf-8" \
+    --cache-control "public,max-age=3600" \
+    --profile "$AWS_PROFILE" >/dev/null
+aws s3 cp "dist/auth.md" "s3://${BUCKET_NAME}/auth.md" \
+    --content-type "text/markdown; charset=utf-8" \
+    --cache-control "public,max-age=3600" \
+    --profile "$AWS_PROFILE" >/dev/null
+aws s3 cp "dist/index.md" "s3://${BUCKET_NAME}/index.md" \
+    --content-type "text/markdown; charset=utf-8" \
+    --cache-control "public,max-age=3600" \
+    --profile "$AWS_PROFILE" >/dev/null
+aws s3 cp "dist/llms.txt" "s3://${BUCKET_NAME}/llms.txt" \
+    --content-type "text/plain; charset=utf-8" \
+    --cache-control "public,max-age=3600" \
+    --profile "$AWS_PROFILE" >/dev/null
+if [ -f "dist/.well-known/api-catalog" ]; then
+    aws s3 cp "dist/.well-known/api-catalog" "s3://${BUCKET_NAME}/.well-known/api-catalog" \
+        --content-type "application/linkset+json" \
+        --cache-control "public,max-age=3600" \
+        --profile "$AWS_PROFILE" >/dev/null
+fi
+if [ -f "dist/.well-known/ai-catalog.json" ]; then
+    aws s3 cp "dist/.well-known/ai-catalog.json" "s3://${BUCKET_NAME}/.well-known/ai-catalog.json" \
+        --content-type "application/json" \
+        --cache-control "public,max-age=3600" \
+        --metadata-directive REPLACE \
+        --profile "$AWS_PROFILE" >/dev/null
+fi
+success "Agent discovery Content-Types set"
+
 # Step 2: Invalidate CloudFront cache
 info "Invalidating CloudFront cache..."
 INVALIDATION_OUTPUT=$(aws cloudfront create-invalidation \
