@@ -1,0 +1,125 @@
+name: Deploy to AWS
+
+# Mobile-friendly deploy: no local computer or terminal required.
+# 1. Add the repository secrets listed under `env:` below
+#    (Settings -> Secrets and variables -> Actions).
+# 2. Run this workflow from the Actions tab ("Run workflow" / workflow_dispatch),
+#    or push to `main`.
+#
+# Mirrors scripts/deploy-to-aws.sh: sync dist/ to S3 (with --delete), fix the
+# Content-Types of the agent-discovery assets, then invalidate CloudFront.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+# Avoid overlapping deploys clobbering each other.
+concurrency:
+  group: deploy-aws
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
+      BUCKET_NAME: ${{ secrets.VITE_S3_BUCKET_NAME }}
+      DISTRIBUTION_ID: ${{ secrets.VITE_CLOUDFRONT_DISTRIBUTION_ID }}
+      # Optional: real API Gateway URLs so generated agent-assets are not blanked.
+      VITE_VISITOR_COUNTER_API: ${{ secrets.VITE_VISITOR_COUNTER_API }}
+      VITE_CONTACT_FORM_API: ${{ secrets.VITE_CONTACT_FORM_API }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate required secrets
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          missing=()
+          [ -n "$BUCKET_NAME" ] || missing+=("VITE_S3_BUCKET_NAME")
+          [ -n "$DISTRIBUTION_ID" ] || missing+=("VITE_CLOUDFRONT_DISTRIBUTION_ID")
+          [ -n "$AWS_ACCESS_KEY_ID" ] || missing+=("AWS_ACCESS_KEY_ID")
+          [ -n "$AWS_SECRET_ACCESS_KEY" ] || missing+=("AWS_SECRET_ACCESS_KEY")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing required repository secrets: ${missing[*]}"
+            echo "Add them under Settings -> Secrets and variables -> Actions, then re-run."
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS credentials
+        run: aws sts get-caller-identity
+
+      - name: Upload site to S3
+        run: |
+          aws s3 sync dist/ "s3://${BUCKET_NAME}" \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable"
+
+      - name: Fix Content-Types for agent-discovery assets
+        run: |
+          aws s3 cp "dist/robots.txt" "s3://${BUCKET_NAME}/robots.txt" \
+            --content-type "text/plain; charset=utf-8" \
+            --cache-control "public,max-age=3600" >/dev/null
+          aws s3 cp "dist/sitemap.xml" "s3://${BUCKET_NAME}/sitemap.xml" \
+            --content-type "application/xml; charset=utf-8" \
+            --cache-control "public,max-age=3600" >/dev/null
+          aws s3 cp "dist/auth.md" "s3://${BUCKET_NAME}/auth.md" \
+            --content-type "text/markdown; charset=utf-8" \
+            --cache-control "public,max-age=3600" >/dev/null
+          aws s3 cp "dist/index.md" "s3://${BUCKET_NAME}/index.md" \
+            --content-type "text/markdown; charset=utf-8" \
+            --cache-control "public,max-age=3600" >/dev/null
+          aws s3 cp "dist/llms.txt" "s3://${BUCKET_NAME}/llms.txt" \
+            --content-type "text/plain; charset=utf-8" \
+            --cache-control "public,max-age=3600" >/dev/null
+          if [ -f "dist/.well-known/api-catalog" ]; then
+            aws s3 cp "dist/.well-known/api-catalog" "s3://${BUCKET_NAME}/.well-known/api-catalog" \
+              --content-type "application/linkset+json" \
+              --cache-control "public,max-age=3600" >/dev/null
+          fi
+          if [ -f "dist/.well-known/ai-catalog.json" ]; then
+            aws s3 cp "dist/.well-known/ai-catalog.json" "s3://${BUCKET_NAME}/.well-known/ai-catalog.json" \
+              --content-type "application/json" \
+              --cache-control "public,max-age=3600" \
+              --metadata-directive REPLACE >/dev/null
+          fi
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*"
+
+      - name: Summary
+        run: |
+          echo "### Deploy complete :rocket:" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Bucket: \`$BUCKET_NAME\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Distribution: \`$DISTRIBUTION_ID\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- CloudFront invalidation issued for \`/*\` (live in 1-2 minutes)." >> "$GITHUB_STEP_SUMMARY"
