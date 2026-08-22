@@ -63,13 +63,15 @@ Resources:
       ProtocolType: HTTP
       CorsConfiguration:
         AllowOrigins:
-          - '*'
+          - 'https://ajwill.ai'
+          - 'https://www.ajwill.ai'
         AllowMethods:
           - POST
           - OPTIONS
         AllowHeaders:
           - Content-Type
         MaxAge: 300
+        AllowCredentials: false
 
   # API Gateway Integration
   ContactFormIntegration:

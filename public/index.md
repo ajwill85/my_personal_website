@@ -24,4 +24,4 @@
 
 ## Public APIs
 
-Visitor counter and contact form are public, unauthenticated Lambda/API Gateway endpoints used by this site. See the API catalog for OpenAPI descriptions.
+Visitor counter and contact form are public, unauthenticated **API Gateway** endpoints (not paths on this CloudFront origin). Catalog anchors and OpenAPI `servers` use the `execute-api` URLs; OpenAPI JSON is only hosted here for discovery.

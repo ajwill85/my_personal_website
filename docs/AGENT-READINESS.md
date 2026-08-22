@@ -10,7 +10,7 @@ How this repo maps to [Agent Ready](https://isitagentready.com) discoverability 
 | Content-Signal | Implemented | `Content-Signal:` lines in robots.txt |
 | Link headers | Implemented | CloudFront `AgentDiscoveryHeadersPolicy` in `website-infrastructure-cloudflare.yaml` |
 | Markdown negotiation | Implemented | CloudFront Function rewrites `/` → `/index.md` when `Accept: text/markdown` |
-| API catalog | Implemented | `public/.well-known/api-catalog` + OpenAPI under `public/api/` |
+| API catalog | Implemented | Generated from `VITE_*_API` execute-api URLs → `public/.well-known/api-catalog` + `public/api/*.openapi.json` |
 | Agent skills index | Generated on build | `public/.well-known/agent-skills/` |
 | ARD ai-catalog | Generated on build | `public/.well-known/ai-catalog.json` |
 | auth.md | Implemented | `public/auth.md` (no OAuth when APIs are public) |

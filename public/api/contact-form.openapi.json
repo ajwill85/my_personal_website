@@ -3,14 +3,9 @@
   "info": {
     "title": "ajwill.ai Contact Form API",
     "version": "1.0.0",
-    "description": "Public contact form handler that emails submissions via Amazon SES"
+    "description": "Contact form Lambda behind API Gateway (POST /contact). Set VITE_CONTACT_FORM_API to the CloudFormation ApiEndpoint (https://{api-id}.execute-api.{region}.amazonaws.com/prod/contact) and re-run npm run generate:agent-assets before deploy. Do not call https://ajwill.ai/contact — that is the static site."
   },
-  "servers": [
-    {
-      "url": "https://ajwill.ai",
-      "description": "Configure the live API Gateway URL via VITE_CONTACT_FORM_API at build time"
-    }
-  ],
+  "servers": [],
   "paths": {
     "/contact": {
       "post": {
@@ -22,13 +17,28 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["fullName", "email", "message"],
+                "required": [
+                  "fullName",
+                  "email",
+                  "message"
+                ],
                 "properties": {
-                  "fullName": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "company": { "type": "string" },
-                  "budget": { "type": "string" },
-                  "message": { "type": "string" }
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "company": {
+                    "type": "string"
+                  },
+                  "budget": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -42,22 +52,32 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success": { "type": "boolean" },
-                    "message": { "type": "string" }
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
                   }
                 }
               }
             }
           },
-          "400": { "description": "Missing required fields" },
-          "500": { "description": "Send failure" }
+          "400": {
+            "description": "Missing required fields"
+          },
+          "500": {
+            "description": "Send failure"
+          }
         }
       },
       "options": {
         "operationId": "contactCorsPreflight",
         "summary": "CORS preflight",
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK"
+          }
         }
       }
     }

@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * Generates sitemap.xml and agent-skills/index.json (with sha256 digests).
+ * Generates sitemap.xml, agent-skills/index.json (with sha256 digests),
+ * api-catalog + OpenAPI servers from VITE_* API Gateway URLs.
  * Run automatically before vite build.
  */
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,6 +13,80 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const site = 'https://ajwill.ai';
 const publicDir = join(root, 'public');
+
+/** Load KEY=value pairs from .env without overriding existing process.env. */
+function loadDotEnv(filePath) {
+  if (!existsSync(filePath)) return;
+  for (const line of readFileSync(filePath, 'utf8').split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq <= 0) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    if (process.env[key] === undefined) process.env[key] = value;
+  }
+}
+
+loadDotEnv(join(root, '.env'));
+
+/**
+ * Split a full API Gateway resource URL into OpenAPI server base + path.
+ * Rejects SPA/CloudFront hosts so agents never POST to HTML.
+ */
+function parseApiGatewayEndpoint(fullUrl, envName) {
+  if (!fullUrl || typeof fullUrl !== 'string') return null;
+  let parsed;
+  try {
+    parsed = new URL(fullUrl.trim());
+  } catch {
+    console.warn(`Ignoring invalid ${envName}: ${fullUrl}`);
+    return null;
+  }
+  const host = parsed.hostname.toLowerCase();
+  if (host === 'ajwill.ai' || host === 'www.ajwill.ai' || host.endsWith('.cloudfront.net')) {
+    console.warn(
+      `Ignoring ${envName}: points at the static site (${host}), not API Gateway. Use the execute-api URL from CloudFormation outputs.`
+    );
+    return null;
+  }
+  if (!host.includes('execute-api') && !host.includes('amazonaws.com')) {
+    console.warn(`Ignoring ${envName}: expected an API Gateway URL, got ${host}`);
+    return null;
+  }
+  const path = parsed.pathname.replace(/\/$/, '') || '/';
+  // Prefer stage base (…/prod) + resource path (/count|/contact)
+  const segments = path.split('/').filter(Boolean);
+  let base;
+  let resourcePath;
+  if (segments.length >= 2) {
+    resourcePath = `/${segments[segments.length - 1]}`;
+    base = `${parsed.origin}/${segments.slice(0, -1).join('/')}`;
+  } else {
+    resourcePath = path.startsWith('/') ? path : `/${path}`;
+    base = parsed.origin;
+  }
+  return {
+    anchor: `${parsed.origin}${path === '/' ? '' : path}`,
+    serverUrl: base,
+    path: resourcePath,
+  };
+}
+
+const visitorApi = parseApiGatewayEndpoint(
+  process.env.VITE_VISITOR_COUNTER_API,
+  'VITE_VISITOR_COUNTER_API'
+);
+const contactApi = parseApiGatewayEndpoint(
+  process.env.VITE_CONTACT_FORM_API,
+  'VITE_CONTACT_FORM_API'
+);
 
 const publishedPosts = [
   'three-legged-trust-stool',
@@ -132,3 +207,240 @@ writeFileSync(
   'utf8'
 );
 console.log('Wrote public/.well-known/ai-catalog.json');
+
+mkdirSync(join(publicDir, 'api'), { recursive: true });
+
+function catalogEntry(anchor, openapiPath) {
+  return {
+    anchor,
+    'service-desc': [
+      {
+        href: `${site}${openapiPath}`,
+        type: 'application/openapi+json',
+      },
+    ],
+    'service-doc': [
+      {
+        href: `${site}/auth.md`,
+        type: 'text/markdown',
+      },
+    ],
+    describedby: [
+      {
+        href: `${site}/.well-known/ai-catalog.json`,
+        type: 'application/json',
+      },
+    ],
+  };
+}
+
+const linkset = [];
+
+if (visitorApi) {
+  const visitorOpenapi = {
+    openapi: '3.1.0',
+    info: {
+      title: 'ajwill.ai Visitor Counter API',
+      version: '1.0.0',
+      description:
+        'Public visitor counter with IP-hash deduplication. Invoked by the portfolio SPA via VITE_VISITOR_COUNTER_API (API Gateway), not via CloudFront paths on ajwill.ai.',
+    },
+    servers: [
+      {
+        url: visitorApi.serverUrl,
+        description: 'API Gateway stage (from VITE_VISITOR_COUNTER_API)',
+      },
+    ],
+    paths: {
+      [visitorApi.path]: {
+        get: {
+          operationId: 'getVisitorCount',
+          summary: 'Increment and return visitor count',
+          responses: {
+            200: {
+              description: 'Current count',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      count: { type: 'integer' },
+                      message: { type: 'string' },
+                      visit_type: { type: 'string' },
+                      is_bot: { type: 'boolean' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  writeFileSync(
+    join(publicDir, 'api', 'visitor-counter.openapi.json'),
+    `${JSON.stringify(visitorOpenapi, null, 2)}\n`,
+    'utf8'
+  );
+  linkset.push(catalogEntry(visitorApi.anchor, '/api/visitor-counter.openapi.json'));
+  console.log(`Wrote visitor OpenAPI (server ${visitorApi.serverUrl}${visitorApi.path})`);
+} else {
+  console.warn(
+    'VITE_VISITOR_COUNTER_API unset or invalid — skipped visitor catalog/OpenAPI update'
+  );
+}
+
+if (contactApi) {
+  const contactOpenapi = {
+    openapi: '3.1.0',
+    info: {
+      title: 'ajwill.ai Contact Form API',
+      version: '1.0.0',
+      description:
+        'Public contact form handler that emails submissions via Amazon SES. Invoked via VITE_CONTACT_FORM_API (API Gateway), not via CloudFront paths on ajwill.ai.',
+    },
+    servers: [
+      {
+        url: contactApi.serverUrl,
+        description: 'API Gateway stage (from VITE_CONTACT_FORM_API)',
+      },
+    ],
+    paths: {
+      [contactApi.path]: {
+        post: {
+          operationId: 'submitContactForm',
+          summary: 'Submit a contact form message',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['fullName', 'email', 'message'],
+                  properties: {
+                    fullName: { type: 'string' },
+                    email: { type: 'string', format: 'email' },
+                    company: { type: 'string' },
+                    budget: { type: 'string' },
+                    message: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: 'Email queued/sent',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: { type: 'boolean' },
+                      message: { type: 'string' },
+                    },
+                  },
+                },
+              },
+            },
+            400: { description: 'Missing required fields' },
+            500: { description: 'Send failure' },
+          },
+        },
+        options: {
+          operationId: 'contactCorsPreflight',
+          summary: 'CORS preflight',
+          responses: {
+            200: { description: 'OK' },
+          },
+        },
+      },
+    },
+  };
+  writeFileSync(
+    join(publicDir, 'api', 'contact-form.openapi.json'),
+    `${JSON.stringify(contactOpenapi, null, 2)}\n`,
+    'utf8'
+  );
+  linkset.push(catalogEntry(contactApi.anchor, '/api/contact-form.openapi.json'));
+  console.log(`Wrote contact OpenAPI (server ${contactApi.serverUrl}${contactApi.path})`);
+} else {
+  // Keep a contract doc, but never point servers at the SPA.
+  const contactStub = {
+    openapi: '3.1.0',
+    info: {
+      title: 'ajwill.ai Contact Form API',
+      version: '1.0.0',
+      description:
+        'Contact form Lambda behind API Gateway (POST /contact). Set VITE_CONTACT_FORM_API to the CloudFormation ApiEndpoint (https://{api-id}.execute-api.{region}.amazonaws.com/prod/contact) and re-run npm run generate:agent-assets before deploy. Do not call https://ajwill.ai/contact — that is the static site.',
+    },
+    servers: [],
+    paths: {
+      '/contact': {
+        post: {
+          operationId: 'submitContactForm',
+          summary: 'Submit a contact form message',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['fullName', 'email', 'message'],
+                  properties: {
+                    fullName: { type: 'string' },
+                    email: { type: 'string', format: 'email' },
+                    company: { type: 'string' },
+                    budget: { type: 'string' },
+                    message: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: 'Email queued/sent',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: { type: 'boolean' },
+                      message: { type: 'string' },
+                    },
+                  },
+                },
+              },
+            },
+            400: { description: 'Missing required fields' },
+            500: { description: 'Send failure' },
+          },
+        },
+        options: {
+          operationId: 'contactCorsPreflight',
+          summary: 'CORS preflight',
+          responses: {
+            200: { description: 'OK' },
+          },
+        },
+      },
+    },
+  };
+  writeFileSync(
+    join(publicDir, 'api', 'contact-form.openapi.json'),
+    `${JSON.stringify(contactStub, null, 2)}\n`,
+    'utf8'
+  );
+  console.warn(
+    'VITE_CONTACT_FORM_API unset or invalid — wrote contact OpenAPI without servers; omitted from api-catalog'
+  );
+}
+
+writeFileSync(
+  join(publicDir, '.well-known', 'api-catalog'),
+  `${JSON.stringify({ linkset }, null, 2)}\n`,
+  'utf8'
+);
+console.log(`Wrote public/.well-known/api-catalog (${linkset.length} anchors)`);

@@ -3,16 +3,16 @@
   "info": {
     "title": "ajwill.ai Visitor Counter API",
     "version": "1.0.0",
-    "description": "Public visitor counter with IP-hash deduplication for https://ajwill.ai"
+    "description": "Public visitor counter with IP-hash deduplication. Invoked by the portfolio SPA via VITE_VISITOR_COUNTER_API (API Gateway), not via CloudFront paths on ajwill.ai."
   },
   "servers": [
     {
-      "url": "https://ajwill.ai",
-      "description": "Configure the live API Gateway URL via VITE_VISITOR_COUNTER_API at build time"
+      "url": "https://u2pg8kjps9.execute-api.us-east-1.amazonaws.com/prod",
+      "description": "API Gateway stage (from VITE_VISITOR_COUNTER_API)"
     }
   ],
   "paths": {
-    "/": {
+    "/count": {
       "get": {
         "operationId": "getVisitorCount",
         "summary": "Increment and return visitor count",
@@ -24,10 +24,18 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "count": { "type": "integer" },
-                    "message": { "type": "string" },
-                    "visit_type": { "type": "string" },
-                    "is_bot": { "type": "boolean" }
+                    "count": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "visit_type": {
+                      "type": "string"
+                    },
+                    "is_bot": {
+                      "type": "boolean"
+                    }
                   }
                 }
               }
