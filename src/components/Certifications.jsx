@@ -89,10 +89,9 @@ const Certifications = () => {
     {
       name: 'AWS Certified AI Practitioner',
       issuer: 'AWS',
-      expected: 'Summer 2026',
+      year: '2026',
       category: 'ai',
-      inProgress: true,
-      certUrl: 'https://aws.amazon.com/certification/certified-ai-practitioner/'
+      certUrl: 'https://www.credly.com/badges/42eb5cf5-0f64-400a-8a9a-ff47547f75b8'
     },
     {
       name: 'AIGP (AI Governance Professional)',
