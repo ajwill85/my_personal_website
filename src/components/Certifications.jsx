@@ -133,6 +133,14 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-developer-associate/'
     },
+    {
+      name: 'Google Associate Cloud Engineer (ACE)',
+      issuer: 'Google',
+      expected: '2026',
+      category: 'cloud',
+      inProgress: true,
+      certUrl: 'https://cloud.google.com/learn/certification/cloud-engineer'
+    },
     // {
     //   name: 'AWS Certified Security Specialty',
     //   issuer: 'AWS',
@@ -263,6 +271,13 @@ const Certifications = () => {
     //   year: '2026',
     //   category: 'ai',
     //   certUrl: 'https://www.credly.com/badges/89907f6c-485c-431a-a0fa-1dcc021e3488'
+    // },
+    // {
+    //   name: 'AWS Certified AI Business Strategist',
+    //   issuer: 'AWS',
+    //   year: '2026',
+    //   category: 'ai',
+    //   certUrl: 'https://www.credly.com/badges/11df1141-35b8-4769-9b67-d3e57d99c1e3'
     // },
     // {
     //   name: 'Qualys VMDR Certified Specialist',
