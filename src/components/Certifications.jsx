@@ -44,14 +44,21 @@ const Certifications = () => {
       inProgress: true,
       certUrl: 'https://www.grcengclub.com/academy'
     },
-    // {
-    //   name: 'Certified in Risk and Information Systems Control (CRISC)',
-    //   issuer: 'ISACA',
-    //   expected: '2027',
-    //   category: 'security',
-    //   planned: true,
-    //   certUrl: 'https://www.isaca.org/credentialing/crisc'
-    // },
+    {
+      name: 'Certified GRC Engineer - AWS Specialty (CGE-AWS)',
+      issuer: 'GRC Engineering Club',
+      expected: '2027',
+      category: 'security',
+      planned: true
+    },
+    {
+      name: 'Certified in Risk and Information Systems Control (CRISC)',
+      issuer: 'ISACA',
+      expected: '2027',
+      category: 'security',
+      planned: true,
+      certUrl: 'https://www.isaca.org/credentialing/crisc'
+    },
     // {
     //   name: 'Certified Information Systems Auditor (CISA)',
     //   issuer: 'ISACA',
@@ -96,18 +103,34 @@ const Certifications = () => {
     {
       name: 'AIGP (AI Governance Professional)',
       issuer: 'IAPP',
-      expected: '2026',
+      expected: '2027',
       category: 'ai',
-      inProgress: true,
+      planned: true,
       certUrl: 'https://www.iapp.org/certify/aigp'
     },
     {
-      name: 'Claude Certified Architect (CCA-F)',
+      name: 'Claude Certified Architect – Foundations (CCA-F)',
       issuer: 'Anthropic',
       expected: '2027',
       category: 'ai',
       planned: true,
       certUrl: 'https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request'
+    },
+    {
+      name: 'ISC² AI Security',
+      issuer: 'ISC2',
+      expected: '2027',
+      category: 'ai',
+      planned: true,
+      certUrl: 'https://www.isc2.org/new-ai-certification'
+    },
+    {
+      name: 'Advanced in AI Security Management (AAISM)',
+      issuer: 'ISACA',
+      expected: '2027',
+      category: 'ai',
+      planned: true,
+      certUrl: 'https://www.isaca.org/credentialing/aaism'
     },
     // Cloud certs
     {
@@ -128,11 +151,20 @@ const Certifications = () => {
     {
       name: 'AWS Certified Developer',
       issuer: 'AWS',
-      expected: 'Summer 2026',
+      expected: '2026',
       category: 'cloud',
       inProgress: true,
       certUrl: 'https://aws.amazon.com/certification/certified-developer-associate/'
     },
+    // Intentionally hidden — kept off the page.
+    // {
+    //   name: 'Google Associate Cloud Engineer (ACE)',
+    //   issuer: 'Google',
+    //   expected: '2026',
+    //   category: 'cloud',
+    //   inProgress: true,
+    //   certUrl: 'https://cloud.google.com/learn/certification/cloud-engineer'
+    // },
     // {
     //   name: 'AWS Certified Security Specialty',
     //   issuer: 'AWS',
@@ -167,14 +199,14 @@ const Certifications = () => {
       details: '10 specializations including Privacy, GRC, TPRM, PIAs, Data Mapping',
       certUrl: 'https://www.credly.com/badges/de15b56a-e8ba-4e88-9de3-25cde63f3122'
     },
-    // {
-    //   name: 'CIPP/US (Certified Information Privacy Professional/United States)',
-    //   issuer: 'IAPP',
-    //   expected: 'Late 2026',
-    //   category: 'privacy',
-    //   planned: true,
-    //   certUrl: 'https://iapp.org/certify/cipp/'
-    // },
+    {
+      name: 'CIPP/US',
+      issuer: 'IAPP',
+      expected: '2027',
+      category: 'privacy',
+      planned: true,
+      certUrl: 'https://iapp.org/certify/cipp/'
+    },
     // {
     //   name: 'Fellow of Information Privacy (FIP)',
     //   issuer: 'IAPP',
@@ -298,42 +330,61 @@ const Certifications = () => {
               <div key={category.id} className="cert-category">
                 <h3 className="cert-category-title">{category.name}</h3>
                 <div className="cert-list">
-                  {certs.map((cert, index) => (
-                    <a
-                      key={index}
-                      href={cert.certUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`cert-card ${cert.highlight ? 'highlight' : ''} ${cert.inProgress ? 'in-progress' : ''} ${cert.planned ? 'planned' : ''} clickable`}
-                    >
-                      <div className="cert-header">
-                        <h4 className="cert-name">{cert.name}</h4>
-                        <span className={cert.inProgress ? 'cert-expected' : cert.planned ? 'cert-expected planned' : 'cert-year'}>
-                          {cert.inProgress || cert.planned ? cert.expected : cert.year}
-                        </span>
-                      </div>
-                      <p className="cert-issuer">{cert.issuer}</p>
-                      {cert.details && <p className="cert-details">{cert.details}</p>}
-                      {cert.inProgress && <span className="cert-status-badge">In Progress</span>}
-                      {cert.planned && <span className="cert-status-badge planned">Roadmap</span>}
-                      <span className={`cert-link-indicator ${cert.inProgress ? 'info' : cert.planned ? 'planned' : 'verify'}`}>
-                        <span className="cert-link-icon">
-                          {cert.inProgress || cert.planned ? (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-                            </svg>
-                          ) : (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <circle cx="12" cy="8" r="7" />
-                              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-                            </svg>
-                          )}
-                        </span>
-                        <span className="cert-link-text">{cert.inProgress || cert.planned ? 'Info' : 'Verify'}</span>
-                      </span>
-                    </a>
-                  ))}
+                  {certs.map((cert, index) => {
+                    const className = `cert-card ${cert.highlight ? 'highlight' : ''} ${cert.inProgress ? 'in-progress' : ''} ${cert.planned ? 'planned' : ''} ${cert.certUrl ? 'clickable' : ''}`;
+                    const content = (
+                      <>
+                        <div className="cert-header">
+                          <h4 className="cert-name">{cert.name}</h4>
+                          <span className={cert.inProgress ? 'cert-expected' : cert.planned ? 'cert-expected planned' : 'cert-year'}>
+                            {cert.inProgress || cert.planned ? cert.expected : cert.year}
+                          </span>
+                        </div>
+                        <p className="cert-issuer">{cert.issuer}</p>
+                        {cert.details && <p className="cert-details">{cert.details}</p>}
+                        {cert.inProgress && <span className="cert-status-badge">In Progress</span>}
+                        {cert.planned && <span className="cert-status-badge planned">Roadmap</span>}
+                        {cert.certUrl && (
+                          <span className={`cert-link-indicator ${cert.inProgress ? 'info' : cert.planned ? 'planned' : 'verify'}`}>
+                            <span className="cert-link-icon">
+                              {cert.inProgress || cert.planned ? (
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                                </svg>
+                              ) : (
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <circle cx="12" cy="8" r="7" />
+                                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                                </svg>
+                              )}
+                            </span>
+                            <span className="cert-link-text">{cert.inProgress || cert.planned ? 'Info' : 'Verify'}</span>
+                          </span>
+                        )}
+                      </>
+                    );
+
+                    if (!cert.certUrl) {
+                      return (
+                        <div key={index} className={className}>
+                          {content}
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={index}
+                        href={cert.certUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={className}
+                      >
+                        {content}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             );
