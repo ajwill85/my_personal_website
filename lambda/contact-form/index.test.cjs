@@ -111,8 +111,10 @@ test('handler rejects malformed requests before sending mail', async () => {
 });
 
 test('handler sends encoded HTML for a valid submission', async () => {
-  const previous = process.env.FROM_EMAIL;
+  const previousFrom = process.env.FROM_EMAIL;
+  const previousTo = process.env.TO_EMAIL;
   process.env.FROM_EMAIL = 'you@example.com';
+  process.env.TO_EMAIL = 'you@example.com';
   const { client, handler } = testHandler();
   try {
     const response = await handler(postEvent(validPayload({
@@ -125,6 +127,7 @@ test('handler sends encoded HTML for a valid submission', async () => {
     assert.equal(JSON.parse(response.body).success, true);
     assert.equal(client.commands.length, 1);
     assert.equal(client.commands[0].input.Source, 'you@example.com');
+    assert.deepEqual(client.commands[0].input.Destination.ToAddresses, ['you@example.com']);
 
     const html = client.commands[0].input.Message.Body.Html.Data;
     const text = client.commands[0].input.Message.Body.Text.Data;
@@ -133,8 +136,35 @@ test('handler sends encoded HTML for a valid submission', async () => {
     assert.match(text, /Not provided/);
     assert.equal(html.includes('<admin>'), false);
   } finally {
-    if (previous === undefined) delete process.env.FROM_EMAIL;
-    else process.env.FROM_EMAIL = previous;
+    if (previousFrom === undefined) delete process.env.FROM_EMAIL;
+    else process.env.FROM_EMAIL = previousFrom;
+    if (previousTo === undefined) delete process.env.TO_EMAIL;
+    else process.env.TO_EMAIL = previousTo;
+  }
+});
+
+test('handler does not send when the recipient env var is unset', async () => {
+  const previousFrom = process.env.FROM_EMAIL;
+  const previousTo = process.env.TO_EMAIL;
+  process.env.FROM_EMAIL = 'you@example.com';
+  delete process.env.TO_EMAIL;
+  const errors = [];
+  const originalError = console.error;
+  console.error = (...args) => {
+    errors.push(args.map(String).join(' '));
+  };
+  try {
+    const { client, handler } = testHandler();
+    const response = await handler(postEvent(validPayload()));
+    assert.equal(response.statusCode, 500);
+    assert.equal(client.commands.length, 0);
+    assert.match(errors.join('\n'), /Recipient address is not configured/);
+  } finally {
+    console.error = originalError;
+    if (previousFrom === undefined) delete process.env.FROM_EMAIL;
+    else process.env.FROM_EMAIL = previousFrom;
+    if (previousTo === undefined) delete process.env.TO_EMAIL;
+    else process.env.TO_EMAIL = previousTo;
   }
 });
 

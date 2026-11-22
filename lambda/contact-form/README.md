@@ -13,8 +13,8 @@ Serverless contact form handler that sends email notifications via AWS SES when 
 
 ## Environment Variables
 
-- `FROM_EMAIL` - Verified SES sender email address
-- `TO_EMAIL` - Recipient email address for form submissions
+- `FROM_EMAIL` - Verified SES sender email address, set from the `SESFromEmail` parameter
+- `TO_EMAIL` - Recipient address, set from the `ContactToEmail` parameter. The function returns an error when this is unset.
 
 ## Request Format
 
@@ -47,30 +47,28 @@ Serverless contact form handler that sends email notifications via AWS SES when 
 
 ## Deployment
 
-### Package and Deploy
-```bash
-# Create deployment package
-cd lambda/contact-form
-zip -r ../contact-form-deployment.zip index.js
-
-# Deploy to AWS
-aws lambda update-function-code \
-  --function-name your-contact-form-function \
-  --zip-file fileb://../contact-form-deployment.zip
-```
-
 ### Using CloudFormation
 ```bash
 aws cloudformation deploy \
   --template-file infrastructure/contact-form-api.yaml \
-  --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com \
-  --capabilities CAPABILITY_IAM
+  --stack-name ajwill-contact-form-api \
+  --parameter-overrides SESFromEmail=you@example.com ContactToEmail=you@example.com \
+  --capabilities CAPABILITY_NAMED_IAM
 ```
 
-`SESFromEmail` is required and has no default. Leave `SESIdentityName` unset or blank to use `SESFromEmail`.
+`SESFromEmail` and `ContactToEmail` are required and have no default. Leave `SESIdentityName` unset or blank to use `SESFromEmail`. `FunctionName` and `ApiName` default to the deployed names `ajwill-contact-form-handler` and `ajwill-contact-form-api`.
 
-The real address can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
+The real addresses can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com ContactToEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
+
+CloudFormation keeps the inline placeholder code. After the stack update, deploy `index.js` separately:
+
+```bash
+cd lambda/contact-form
+zip ../contact-form-deployment.zip index.js
+aws lambda update-function-code \
+  --function-name ajwill-contact-form-handler \
+  --zip-file fileb://../contact-form-deployment.zip
+```
 
 ## IAM Permissions Required
 
