@@ -207,15 +207,15 @@ const Certifications = () => {
       planned: true,
       certUrl: 'https://iapp.org/certify/cipp/'
     },
-    // {
-    //   name: 'Fellow of Information Privacy (FIP)',
-    //   issuer: 'IAPP',
-    //   expected: '2027',
-    //   category: 'privacy',
-    //   planned: true,
-    //   details: 'Milestone designation unlocked by AIGP & CIPP/US with CISSP experience waiver.',
-    //   certUrl: 'https://iapp.org/certify/fip/'
-    // },
+    {
+      name: 'Fellow of Information Privacy (FIP)',
+      issuer: 'IAPP',
+      expected: '2027',
+      category: 'privacy',
+      planned: true,
+      details: 'Milestone designation unlocked by AIGP & CIPP/US with CISSP experience waiver.',
+      certUrl: 'https://iapp.org/certify/fip/'
+    },
     // {
     //   name: 'HITRUST Certified CSF Practitioner (CCSFP)',
     //   issuer: 'HITRUST',
