@@ -10,6 +10,7 @@
     "build": "vite build",
     "generate:agent-assets": "node scripts/generate-agent-assets.mjs",
     "lint": "eslint .",
+    "test": "node --test lambda/contact-form/index.test.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

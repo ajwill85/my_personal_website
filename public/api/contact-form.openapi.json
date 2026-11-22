@@ -24,20 +24,27 @@
                 ],
                 "properties": {
                   "fullName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "email": {
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
+                    "maxLength": 254
                   },
                   "company": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 120
                   },
                   "budget": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 80
                   },
                   "message": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 5000
                   }
                 }
               }
@@ -64,7 +71,7 @@
             }
           },
           "400": {
-            "description": "Missing required fields"
+            "description": "Missing or invalid fields"
           },
           "500": {
             "description": "Send failure"

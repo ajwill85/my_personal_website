@@ -6,7 +6,7 @@ Serverless contact form handler that sends email notifications via AWS SES when 
 ## Features
 
 - ✅ **Email notifications** via AWS SES
-- ✅ **Input validation** for required fields
+- ✅ **Input validation** for required fields, email format, and maximum lengths
 - ✅ **CORS enabled** for cross-origin requests
 - ✅ **HTML & plain text emails** for better compatibility
 - ✅ **Environment-based configuration** (no hardcoded values)

@@ -114,6 +114,7 @@ aws cloudformation delete-stack --stack-name portfolio-visitor-counter
 - **ProjectName**: Prefix for resource names (lowercase, hyphens only)
 - **DomainName**: Your custom domain (e.g., example.com)
 - **SESFromEmail**: Verified SES email address
+- **SESIdentityName**: Optional SES identity (email or domain) allowed to send. Defaults to SESFromEmail.
 
 ### Environment-Specific
 
