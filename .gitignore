@@ -51,6 +51,7 @@ resumes/
 *.key
 aws-credentials.json
 credentials.json
+samconfig.toml
 
 # Lambda deployment artifacts
 lambda-deployment.zip

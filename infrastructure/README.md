@@ -53,9 +53,13 @@ aws cloudformation deploy \
 aws cloudformation deploy \
   --template-file contact-form-api.yaml \
   --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=your-verified-email@example.com \
+  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com \
   --capabilities CAPABILITY_IAM
 ```
+
+`SESFromEmail` is required. `SESIdentityName` is optional; leave it unset or blank to use `SESFromEmail`.
+
+To keep the real address out of shell history, put the same overrides in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
 
 ### Deploy Website Infrastructure
 
@@ -113,7 +117,8 @@ aws cloudformation delete-stack --stack-name portfolio-visitor-counter
 
 - **ProjectName**: Prefix for resource names (lowercase, hyphens only)
 - **DomainName**: Your custom domain (e.g., example.com)
-- **SESFromEmail**: Verified SES email address
+- **SESFromEmail**: Required verified SES email address. No default. Pass `--parameter-overrides SESFromEmail=you@example.com`.
+- **SESIdentityName**: Optional SES identity (email or domain) allowed to send. Defaults to empty and falls back to SESFromEmail. Pass `SESIdentityName=you@example.com` to set it.
 
 ### Environment-Specific
 

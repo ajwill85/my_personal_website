@@ -6,7 +6,7 @@ Serverless contact form handler that sends email notifications via AWS SES when 
 ## Features
 
 - ✅ **Email notifications** via AWS SES
-- ✅ **Input validation** for required fields
+- ✅ **Input validation** for required fields, email format, and maximum lengths
 - ✅ **CORS enabled** for cross-origin requests
 - ✅ **HTML & plain text emails** for better compatibility
 - ✅ **Environment-based configuration** (no hardcoded values)
@@ -64,9 +64,13 @@ aws lambda update-function-code \
 aws cloudformation deploy \
   --template-file infrastructure/contact-form-api.yaml \
   --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=your-verified-email@example.com \
+  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com \
   --capabilities CAPABILITY_IAM
 ```
+
+`SESFromEmail` is required and has no default. Leave `SESIdentityName` unset or blank to use `SESFromEmail`.
+
+The real address can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
 
 ## IAM Permissions Required
 

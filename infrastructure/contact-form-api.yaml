@@ -4,8 +4,17 @@ Description: 'Contact Form API - Lambda + API Gateway for handling form submissi
 Parameters:
   SESFromEmail:
     Type: String
-    Default: noreply@example.com
-    Description: Verified SES email address for sending emails
+    Description: Verified SES email address for sending emails. Required; pass it at deploy time.
+
+  SESIdentityName:
+    Type: String
+    Default: ''
+    Description: >
+      Verified SES identity the function may send as. Use an email address or a
+      domain. Leave blank to use SESFromEmail.
+
+Conditions:
+  HasExplicitSesIdentity: !Not [!Equals [!Ref SESIdentityName, '']]
 
 Resources:
   # IAM Role for Lambda
@@ -31,19 +40,25 @@ Resources:
                 Action:
                   - ses:SendEmail
                   - ses:SendRawEmail
-                Resource: '*'
+                Resource: !Sub
+                  - 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${IdentityName}'
+                  - IdentityName: !If
+                      - HasExplicitSesIdentity
+                      - !Ref SESIdentityName
+                      - !Ref SESFromEmail
 
   # Lambda Function
   ContactFormFunction:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: portfolio-contact-form-handler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Handler: index.handler
       Role: !GetAtt ContactFormLambdaRole.Arn
       Timeout: 30
       Environment:
         Variables:
+          FROM_EMAIL: !Ref SESFromEmail
           SES_FROM_EMAIL: !Ref SESFromEmail
       Code:
         ZipFile: |
@@ -97,6 +112,10 @@ Resources:
       ApiId: !Ref ContactFormApi
       StageName: prod
       AutoDeploy: true
+      # Low steady rate and a small burst for a personal contact form.
+      DefaultRouteSettings:
+        ThrottlingRateLimit: 5
+        ThrottlingBurstLimit: 10
 
   # Lambda Permission for API Gateway
   ApiGatewayInvokePermission:
