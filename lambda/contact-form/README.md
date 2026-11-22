@@ -64,7 +64,7 @@ aws lambda update-function-code \
 aws cloudformation deploy \
   --template-file infrastructure/contact-form-api.yaml \
   --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=your-verified-email@example.com \
+  --parameter-overrides SESFromEmail=ajwilliams85@gmail.com SESIdentityName=ajwilliams85@gmail.com \
   --capabilities CAPABILITY_IAM
 ```
 

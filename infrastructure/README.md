@@ -53,7 +53,7 @@ aws cloudformation deploy \
 aws cloudformation deploy \
   --template-file contact-form-api.yaml \
   --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=your-verified-email@example.com \
+  --parameter-overrides SESFromEmail=ajwilliams85@gmail.com SESIdentityName=ajwilliams85@gmail.com \
   --capabilities CAPABILITY_IAM
 ```
 
@@ -113,8 +113,8 @@ aws cloudformation delete-stack --stack-name portfolio-visitor-counter
 
 - **ProjectName**: Prefix for resource names (lowercase, hyphens only)
 - **DomainName**: Your custom domain (e.g., example.com)
-- **SESFromEmail**: Verified SES email address
-- **SESIdentityName**: Optional SES identity (email or domain) allowed to send. Defaults to SESFromEmail.
+- **SESFromEmail**: Verified SES email address. Default is the email identity `ajwilliams85@gmail.com`.
+- **SESIdentityName**: SES identity allowed to send. Default is the same email identity. Leave blank to use SESFromEmail. Set a domain only when the verified identity is a domain.
 
 ### Environment-Specific
 
