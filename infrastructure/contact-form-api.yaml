@@ -4,16 +4,14 @@ Description: 'Contact Form API - Lambda + API Gateway for handling form submissi
 Parameters:
   SESFromEmail:
     Type: String
-    Default: ajwilliams85@gmail.com
-    Description: Verified SES email address for sending emails
+    Description: Verified SES email address for sending emails. Required; pass it at deploy time.
 
   SESIdentityName:
     Type: String
-    Default: ajwilliams85@gmail.com
+    Default: ''
     Description: >
-      Verified SES identity the function may send as. The contact form uses an
-      email identity, so this matches SESFromEmail. Pass a domain only when the
-      verified identity is a domain. Leave blank to use SESFromEmail.
+      Verified SES identity the function may send as. Use an email address or a
+      domain. Leave blank to use SESFromEmail.
 
 Conditions:
   HasExplicitSesIdentity: !Not [!Equals [!Ref SESIdentityName, '']]

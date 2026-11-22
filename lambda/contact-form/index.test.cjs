@@ -111,23 +111,49 @@ test('handler rejects malformed requests before sending mail', async () => {
 });
 
 test('handler sends encoded HTML for a valid submission', async () => {
+  const previous = process.env.FROM_EMAIL;
+  process.env.FROM_EMAIL = 'you@example.com';
   const { client, handler } = testHandler();
-  const response = await handler(postEvent(validPayload({
-    fullName: "Ada O'Brien <admin>",
-    company: '',
-    budget: null,
-  })));
+  try {
+    const response = await handler(postEvent(validPayload({
+      fullName: "Ada O'Brien <admin>",
+      company: '',
+      budget: null,
+    })));
 
-  assert.equal(response.statusCode, 200);
-  assert.equal(JSON.parse(response.body).success, true);
-  assert.equal(client.commands.length, 1);
+    assert.equal(response.statusCode, 200);
+    assert.equal(JSON.parse(response.body).success, true);
+    assert.equal(client.commands.length, 1);
+    assert.equal(client.commands[0].input.Source, 'you@example.com');
 
-  const html = client.commands[0].input.Message.Body.Html.Data;
-  const text = client.commands[0].input.Message.Body.Text.Data;
-  assert.match(html, /Ada O&#39;Brien &lt;admin&gt;/);
-  assert.match(html, /Not provided/);
-  assert.match(text, /Not provided/);
-  assert.equal(html.includes('<admin>'), false);
+    const html = client.commands[0].input.Message.Body.Html.Data;
+    const text = client.commands[0].input.Message.Body.Text.Data;
+    assert.match(html, /Ada O&#39;Brien &lt;admin&gt;/);
+    assert.match(html, /Not provided/);
+    assert.match(text, /Not provided/);
+    assert.equal(html.includes('<admin>'), false);
+  } finally {
+    if (previous === undefined) delete process.env.FROM_EMAIL;
+    else process.env.FROM_EMAIL = previous;
+  }
+});
+
+test('handler does not send when the sender env var is unset', async () => {
+  const previousFrom = process.env.FROM_EMAIL;
+  const previousSes = process.env.SES_FROM_EMAIL;
+  delete process.env.FROM_EMAIL;
+  delete process.env.SES_FROM_EMAIL;
+  try {
+    const { client, handler } = testHandler();
+    const response = await handler(postEvent(validPayload()));
+    assert.equal(response.statusCode, 500);
+    assert.equal(client.commands.length, 0);
+  } finally {
+    if (previousFrom === undefined) delete process.env.FROM_EMAIL;
+    else process.env.FROM_EMAIL = previousFrom;
+    if (previousSes === undefined) delete process.env.SES_FROM_EMAIL;
+    else process.env.SES_FROM_EMAIL = previousSes;
+  }
 });
 
 test('handler answers CORS preflight', async () => {

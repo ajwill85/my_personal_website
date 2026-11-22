@@ -239,8 +239,12 @@ function buildHandler(client, createCommand = createSendEmailCommand) {
       }
 
       const rendered = renderEmail(validated.value);
-      const fromEmail = process.env.FROM_EMAIL || process.env.SES_FROM_EMAIL || 'noreply@example.com';
+      const fromEmail = process.env.FROM_EMAIL || process.env.SES_FROM_EMAIL;
       const toEmail = process.env.TO_EMAIL || 'contact@example.com';
+      if (!fromEmail) {
+        console.error('Sender address is not configured');
+        return jsonResponse(500, headers, { error: 'Failed to send email' });
+      }
 
       const command = createCommand({
         Source: fromEmail,

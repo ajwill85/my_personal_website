@@ -64,9 +64,13 @@ aws lambda update-function-code \
 aws cloudformation deploy \
   --template-file infrastructure/contact-form-api.yaml \
   --stack-name portfolio-contact-form \
-  --parameter-overrides SESFromEmail=ajwilliams85@gmail.com SESIdentityName=ajwilliams85@gmail.com \
+  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com \
   --capabilities CAPABILITY_IAM
 ```
+
+`SESFromEmail` is required and has no default. Leave `SESIdentityName` unset or blank to use `SESFromEmail`.
+
+The real address can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
 
 ## IAM Permissions Required
 
