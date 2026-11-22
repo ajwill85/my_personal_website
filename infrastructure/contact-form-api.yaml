@@ -13,6 +13,20 @@ Parameters:
       Verified SES identity the function may send as. Use an email address or a
       domain. Leave blank to use SESFromEmail.
 
+  ContactToEmail:
+    Type: String
+    Description: Recipient address for contact form mail. Required; pass it at deploy time.
+
+  FunctionName:
+    Type: String
+    Default: ajwill-contact-form-handler
+    Description: Lambda function name. Default matches the deployed function.
+
+  ApiName:
+    Type: String
+    Default: ajwill-contact-form-api
+    Description: HTTP API name. Default matches the deployed API.
+
 Conditions:
   HasExplicitSesIdentity: !Not [!Equals [!Ref SESIdentityName, '']]
 
@@ -51,7 +65,7 @@ Resources:
   ContactFormFunction:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: portfolio-contact-form-handler
+      FunctionName: !Ref FunctionName
       Runtime: nodejs22.x
       Handler: index.handler
       Role: !GetAtt ContactFormLambdaRole.Arn
@@ -60,6 +74,7 @@ Resources:
         Variables:
           FROM_EMAIL: !Ref SESFromEmail
           SES_FROM_EMAIL: !Ref SESFromEmail
+          TO_EMAIL: !Ref ContactToEmail
       Code:
         ZipFile: |
           // Placeholder - will be updated via deployment script
@@ -74,7 +89,7 @@ Resources:
   ContactFormApi:
     Type: AWS::ApiGatewayV2::Api
     Properties:
-      Name: portfolio-contact-form-api
+      Name: !Ref ApiName
       ProtocolType: HTTP
       CorsConfiguration:
         AllowOrigins:
