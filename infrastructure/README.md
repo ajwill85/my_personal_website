@@ -53,11 +53,11 @@ aws cloudformation deploy \
 aws cloudformation deploy \
   --template-file contact-form-api.yaml \
   --stack-name ajwill-contact-form-api \
-  --parameter-overrides SESFromEmail=you@example.com ContactToEmail=you@example.com \
+  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com ContactToEmail=you@example.com \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-`SESFromEmail` and `ContactToEmail` are required. `SESIdentityName` is optional; leave it unset or blank to use `SESFromEmail`. `FunctionName` and `ApiName` default to `ajwill-contact-form-handler` and `ajwill-contact-form-api`.
+`SESFromEmail` and `SESIdentityName` are required and have no default. `SESIdentityName` must be a verified SES identity (email or domain). `ContactToEmail` is required. `FunctionName` and `ApiName` default to `ajwill-contact-form-handler` and `ajwill-contact-form-api`.
 
 CloudFormation keeps the inline placeholder handler. After the stack update, deploy the function code separately:
 
@@ -69,7 +69,7 @@ aws lambda update-function-code \
   --zip-file fileb://../contact-form-deployment.zip
 ```
 
-To keep real addresses out of shell history, put the same overrides in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com ContactToEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
+To keep real addresses out of shell history, put the same overrides in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com SESIdentityName=you@example.com ContactToEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
 
 ### Deploy Website Infrastructure
 
@@ -129,7 +129,7 @@ aws cloudformation delete-stack --stack-name portfolio-visitor-counter
 - **DomainName**: Your custom domain (e.g., example.com)
 - **SESFromEmail**: Required verified SES email address. No default. Pass `--parameter-overrides SESFromEmail=you@example.com`.
 - **ContactToEmail**: Required recipient address. No default. Pass `ContactToEmail=you@example.com`.
-- **SESIdentityName**: Optional SES identity (email or domain) allowed to send. Defaults to empty and falls back to SESFromEmail. Pass `SESIdentityName=you@example.com` to set it.
+- **SESIdentityName**: Required verified SES identity (email or domain). No default. Pass `SESIdentityName=you@example.com`.
 - **FunctionName**: Lambda function name. Defaults to `ajwill-contact-form-handler`.
 - **ApiName**: HTTP API name. Defaults to `ajwill-contact-form-api`.
 
