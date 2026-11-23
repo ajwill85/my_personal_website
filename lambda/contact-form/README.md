@@ -52,13 +52,13 @@ Serverless contact form handler that sends email notifications via AWS SES when 
 aws cloudformation deploy \
   --template-file infrastructure/contact-form-api.yaml \
   --stack-name ajwill-contact-form-api \
-  --parameter-overrides SESFromEmail=you@example.com ContactToEmail=you@example.com \
+  --parameter-overrides SESFromEmail=you@example.com SESIdentityName=you@example.com ContactToEmail=you@example.com \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-`SESFromEmail` and `ContactToEmail` are required and have no default. Leave `SESIdentityName` unset or blank to use `SESFromEmail`. `FunctionName` and `ApiName` default to the deployed names `ajwill-contact-form-handler` and `ajwill-contact-form-api`.
+`SESFromEmail` and `SESIdentityName` are required and have no default. `SESIdentityName` must be a verified SES identity (email or domain). `ContactToEmail` is required and has no default. `FunctionName` and `ApiName` default to the deployed names `ajwill-contact-form-handler` and `ajwill-contact-form-api`.
 
-The real addresses can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com ContactToEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
+The real addresses can live in an optional git-ignored `samconfig.toml` (`parameter_overrides = "SESFromEmail=you@example.com SESIdentityName=you@example.com ContactToEmail=you@example.com"`). `samconfig.toml` is listed in `.gitignore`.
 
 CloudFormation keeps the inline placeholder code. After the stack update, deploy `index.js` separately:
 

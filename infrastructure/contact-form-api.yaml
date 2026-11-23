@@ -8,10 +8,7 @@ Parameters:
 
   SESIdentityName:
     Type: String
-    Default: ''
-    Description: >
-      Verified SES identity the function may send as. Use an email address or a
-      domain. Leave blank to use SESFromEmail.
+    Description: Required. Must be a verified SES identity, email or domain. No default; pass it at deploy time.
 
   ContactToEmail:
     Type: String
@@ -26,9 +23,6 @@ Parameters:
     Type: String
     Default: ajwill-contact-form-api
     Description: HTTP API name. Default matches the deployed API.
-
-Conditions:
-  HasExplicitSesIdentity: !Not [!Equals [!Ref SESIdentityName, '']]
 
 Resources:
   # IAM Role for Lambda
@@ -54,12 +48,7 @@ Resources:
                 Action:
                   - ses:SendEmail
                   - ses:SendRawEmail
-                Resource: !Sub
-                  - 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${IdentityName}'
-                  - IdentityName: !If
-                      - HasExplicitSesIdentity
-                      - !Ref SESIdentityName
-                      - !Ref SESFromEmail
+                Resource: !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${SESIdentityName}'
 
   # Lambda Function
   ContactFormFunction:
